@@ -94,6 +94,7 @@ setAutologin() {
 }
 
 # Inizializzazione degli utenti e delle password e installazione packages sistema operativo e abilitazione servizi
+: '
 clear
 showHeader "core"
 
@@ -117,3 +118,4 @@ clear
 setDefaultEditor
 setAutologin
 waitForInput
+'
