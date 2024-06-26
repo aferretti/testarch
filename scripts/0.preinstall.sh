@@ -50,8 +50,11 @@ getFirstDiskAvailable() {
 
         if [ "${devtype,,}" = "disk" ] && { [ "${devbus,,}" = "ata" ] || [ "${devbus,,}" = "ata" ]; }; then
             DISK="$devname"
+            exit
         fi
     done
+
+    echo "trovato " $DISK
 }
 
 getDisk() {
