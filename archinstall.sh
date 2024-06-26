@@ -35,5 +35,5 @@ if [ $? -eq 0 ]; then
     # esecuzione dello script di post-installazione
     #( arch-chroot /mnt ${HOME}/archinstall/scripts/2.finalization.sh )
 else
-    printf "HELP"
+    printf "HELP %d" $?
 fi

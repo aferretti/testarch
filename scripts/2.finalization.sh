@@ -12,7 +12,7 @@ source $SCRIPTS_DIR/helpers.sh
 installOpenbox() {
     pacman -S openbox xorg-server xorg-xinit xorg-fonts-misc xterm --noconfirm --needed
 
-    
+    cp /etc/X11/xinit/xinitrc ~/.xinitrc
 }
 
 cleanup() {
