@@ -94,13 +94,16 @@ setAutologin() {
 }
 
 # Inizializzazione degli utenti e delle password e installazione packages sistema operativo e abilitazione servizi
-: '
 clear
 showHeader "core"
 
 setUsers
 installBasePackages
+waitForInput
+
+clear
 installLinuxPackages
+waitForInput
 
 # Impostazioni timezone, locale e preparazione GRUB
 clear
@@ -108,6 +111,9 @@ showHeader "timezone"
 
 setTimezoneAndLocale
 configureGrub
+waitForInput
+
+clear
 setDefaultEditor
 setAutologin
-'
+waitForInput

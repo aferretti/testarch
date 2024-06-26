@@ -26,3 +26,7 @@ checkError() {
         if [ -z $2 ]; then exit; fi
     fi
 }
+
+waitForInput() {
+    read -n 1 -s
+}

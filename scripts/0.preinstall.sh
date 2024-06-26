@@ -153,21 +153,26 @@ clone() {
 }
 
 # Esecuzione verifiche preliminari alla procedura di installazione
-#clear
+clear
 showHeader "ciccio"
 
-#doChecks
-#getDisk
+doChecks
+getDisk
+waitForInput
 
 # Esecuzione delle operazioni preliminari alla procedura di installazione
-#clear
+clear
 showHeader "pluto" 
-clone
 
-: '
 setTime
 setDisk
+waitForInput
+
+clear
 initPacman
+waitForInput
+
+clear
 clone
 initFSTable
-'
+waitForInput
