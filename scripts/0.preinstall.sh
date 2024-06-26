@@ -97,7 +97,7 @@ createVolumes() {
 
 formatVolumes() {
     mkfs.fat -F 32 ${DISK}1
-    #checkError "mkfs.fat -FI 32 ${DISK}1"
+    #checkError "mkfs.fat -F 32 ${DISK}1"
 
     mkswap ${DISK}2
     checkError "mkswap ${DISK}2"
@@ -119,8 +119,8 @@ mountVolumes() {
 
 setDisk() {
     createVolumes
-    formatVolumes
-    mountVolumes
+    #formatVolumes
+    #mountVolumes
 }
 
 initPacman() {
