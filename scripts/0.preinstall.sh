@@ -55,7 +55,7 @@ echo $devname $devtype $devbus
 
         if [ "${devtype,,}" = "disk" ] && { [ "${devbus,,}" = "ata" ] || [ "${devbus,,}" = "scsi" ]; }; then
             DISK="$devname"
-            exit
+            return
         fi
     done
 }
