@@ -97,7 +97,7 @@ createVolumes() {
 
 formatVolumes() {
     mkfs.fat -F 32 ${DISK}1
-    checkError "mkfs.fat -F 32 ${DISK}1"
+    checkError "mkfs.fat -Fl 32 ${DISK}1"
 
     mkswap ${DISK}2
     checkError "mkswap ${DISK}2"
