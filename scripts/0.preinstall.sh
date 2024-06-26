@@ -102,8 +102,8 @@ formatVolumes() {
     mkswap ${DISK}2
     checkError "mkswap ${DISK}2"
 
-    mkfs.ext4 ${DISK}3
-    checkError "mkfs.ext4 ${DISK}3"
+    mkfs.ext4 -q ${DISK}3
+    checkError "mkfs.ext4 -q ${DISK}3"
 }
 
 mountVolumes() {
