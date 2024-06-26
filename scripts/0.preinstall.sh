@@ -57,8 +57,6 @@ getFirstDiskAvailable() {
             exit
         fi
     done
-
-    echo "trovato " $DISK
 }
 
 getDisk() {
@@ -67,6 +65,8 @@ getDisk() {
     if [ -z $DISK ]; then
         saveLog "ERROR! No available disks ata or scsi found"
         exit 
+    else
+        echo "trovato " $DISK
     fi
 }
 
