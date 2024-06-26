@@ -14,7 +14,7 @@ setEnvironmentVariables() {
     if [ ! -d $ASSETS_DIR ]; then return 4; fi
 
     if [ ! -d $LOGS_DIR ]; then mkdir $LOGS_DIR; fi
-    if [ ! -f $INSTALL_LOG ]; then touch $INSTALL_LOG; fi
+    if [ ! -f $INSTALL_LOG ]; then touch -f $INSTALL_LOG; fi
 
     return 0
 }

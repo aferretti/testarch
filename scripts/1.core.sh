@@ -53,7 +53,7 @@ setTimezoneAndLocale() {
     hwclock --systohc
     checkError "hwclock --systohc"
 
-    sed -i ( printf "s/^#%s UTF-8/%s UTF-8/" ${LANG} ${LANG} ) /etc/locale.gen
+    sed -i 's/^#${LANG} UTF-8/${LANG} UTF-8/' /etc/locale.gen
     checkError "sed -i ( printf 's/^#%s UTF-8/%s UTF-8/' ${LANG} ${LANG} ) /etc/locale.gen"
 
     locale-gen

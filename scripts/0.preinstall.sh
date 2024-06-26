@@ -144,7 +144,9 @@ clone() {
     touch -f "${configFile}"
     checkError 'touch -f "${configFile}'
 
-    echo "BASE_DIR=${targetPath}" >> ${configFile}
+    targetPath="${HOME}/archinstall"
+
+    #echo "BASE_DIR=${targetPath}" >> ${configFile}
     echo "ASSETS_DIR=${targetPath}/assets" >> ${configFile}
     echo "SCRIPTS_DIR=${targetPath}/scripts" >> ${configFile}
     echo "CONFIGS_DIR=${configPath}" >> ${configFile}
