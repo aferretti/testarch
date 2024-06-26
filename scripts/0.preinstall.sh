@@ -107,14 +107,14 @@ formatVolumes() {
 }
 
 mountVolumes() {
-    mount /dev/${DISK}3 /mnt
-    checkError "mount /dev/${DISK}3 /mnt"
+    mount ${DISK}3 /mnt
+    checkError "mount ${DISK}3 /mnt"
 
-    mount --mkdir /dev/${DISK}1 /mnt/boot
-    checkError "mount --mkdir /dev/${DISK}1 /mnt/boot"
+    mount --mkdir ${DISK}1 /mnt/boot
+    checkError "mount --mkdir ${DISK}1 /mnt/boot"
 
-    swapon /dev/${DISK}2
-    checkError "swapon /dev/${DISK}2"
+    swapon ${DISK}2
+    checkError "swapon ${DISK}2"
 }
 
 setDisk() {
