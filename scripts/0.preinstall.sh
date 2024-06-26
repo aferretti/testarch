@@ -161,7 +161,7 @@ doChecks
 #waitForInput
 
 # Esecuzione delle operazioni preliminari alla procedura di installazione
-' ;
+' :
 clear
 showHeader "pluto" 
 
