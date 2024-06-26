@@ -79,18 +79,18 @@ createVolumes() {
     sgdisk -Z $DISK 
     checkError "sgdisk -Z $DISK"
 
-    partprobe $DISK
-    checkError "partprobe $DISK"
-
     sgdisk -a 2048 -o $DISK
     checkError "sgdisk -a 2048 -o $DISK"
 
+    sgdisk -d 1 $DISK
     sgdisk -n 1::$UEFI --typecode=1:ef00 --change-name=1:'EFIBOOT' $DISK
     checkError "sgdisk -n 1::$UEFI --typecode=1:ef00 --change-name=1:'EFIBOOT' $DISK"
 
+    sgdisk -d 2 $DISK
     sgdisk -n 2::$SWAP --typecode=1:8200 --change-name=2:'SWAP' $DISK
     checkError "sgdisk -n 2::$SWAP --typecode=1:8200 --change-name=2:'SWAP' $DISK"
 
+    sgdisk -d 3 $DISK
     sgdisk -n 3::-0 --typecode=3:8300 --change-name=3:'ROOT' $DISK
     checkError "sgdisk -n 3::-0 --typecode=3:8300 --change-name=3:'ROOT' $DISK"
 
