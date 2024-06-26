@@ -157,8 +157,8 @@ clear
 showHeader "ciccio"
 
 doChecks
-#getDisk
-#waitForInput
+getDisk
+waitForInput
 
 # Esecuzione delle operazioni preliminari alla procedura di installazione
 : '
