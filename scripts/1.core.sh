@@ -7,8 +7,7 @@ source ${HOME}/archinstall/configs/env.conf
 source ${CONFIGS_DIR}/setup.conf
 
 # Caricamento file helpers.sh
-#source ${SCRIPTS_DIR}/helpers.sh
-#echo $DISK
+source ${SCRIPTS_DIR}/helpers.sh
 
 setUsers() {
     printf "root:${PASSWD}" | chpasswd
@@ -39,8 +38,8 @@ installBasePackages() {
 }
 
 installLinuxPackages() {
-    pacman -S linux linux-headers linux-firmware
-    checkError "pacman -S linux linux-headers linux-firmware"
+    pacman -S linux linux-headers linux-firmware --noconfirm --needed
+    checkError "pacman -S linux linux-headers linux-firmware --noconfirm --needed"
 
     mkinitcpio -p linux
     checkError "mkinitcpio -p linux"
