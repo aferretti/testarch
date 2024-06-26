@@ -103,7 +103,7 @@ waitForInput
 clear
 installLinuxPackages
 waitForInput
-: '
+
 # Impostazioni timezone, locale e preparazione GRUB
 clear
 showHeader "timezone"
@@ -116,4 +116,3 @@ clear
 setDefaultEditor
 setAutologin
 waitForInput
-'
