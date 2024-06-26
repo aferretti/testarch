@@ -2,28 +2,17 @@
 setEnvironmentVariables() {
     set -a
     BASE_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-    echo $BASE_DIR
-
     ASSETS_DIR=${BASE_DIR}/assets
-    echo $ASSETS_DIR
-
     SCRIPTS_DIR=${BASE_DIR}/scripts
-    echo $SCRIPTS_DIR
-
     CONFIGS_DIR=${BASE_DIR}/configs
-    echo $CONFIGS_DIR
-
     LOGS_DIR=${BASE_DIR}/logs
-    echo $LOGS_DIR
-
     INSTALL_LOG=${LOGS_DIR}/"$( date "+%Y%m%d-%H%M%S" ).log" 
-    echo $INSTALL_LOG
     set +a
 
     if [ ! -d $SCRIPTS_DIR ]; then return 2; fi
     if [ ! -d $CONFIGS_DIR ]; then return 3; fi
     if [ ! -d $ASSETS_DIR ]; then return 4; fi
-    if [ ! -d $LOGS_DIR ]; then return 5; fi
+    #if [ ! -d $LOGS_DIR ]; then return 5; fi
 
     return 0
 }

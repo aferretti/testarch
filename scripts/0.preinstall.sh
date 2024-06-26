@@ -164,6 +164,7 @@ waitForInput
 clear
 showHeader "pluto" 
 
+' ;
 setTime
 setDisk
 waitForInput
@@ -176,3 +177,4 @@ clear
 clone
 initFSTable
 waitForInput
+'
