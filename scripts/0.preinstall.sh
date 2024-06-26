@@ -77,8 +77,8 @@ setTime() {
 }
 
 createVolumes() {
-    umount -A --recursive /mnt
-    checkError "umount -A --recursive /mnt"
+    #umount -A --recursive /mnt
+    #checkError "umount -A --recursive /mnt"
 
     sgdisk -Z $DISK 
     checkError "sgdisk -Z $DISK"
