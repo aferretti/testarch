@@ -73,11 +73,14 @@ setTime() {
 }
 
 createVolumes() {
-    umount -A --recursive /mnt
+    #umount -A --recursive /mnt
     #checkError "umount -A --recursive /mnt"
 
     sgdisk -Z $DISK 
     checkError "sgdisk -Z $DISK"
+
+    partprobe $DISK
+    checkError "partprobe $DISK"
 
     sgdisk -a 2048 -o $DISK
     checkError "sgdisk -a 2048 -o $DISK"
@@ -97,7 +100,7 @@ createVolumes() {
 
 formatVolumes() {
     mkfs.fat -F 32 ${DISK}1
-    #checkError "mkfs.fat -F 32 ${DISK}1"
+    checkError "mkfs.fat -F 32 ${DISK}1"
 
     mkswap ${DISK}2
     checkError "mkswap ${DISK}2"
