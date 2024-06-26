@@ -44,9 +44,10 @@ getFirstDiskAvailable() {
     for dev in $(lsblk -ndo name); do
         devinfo="$(udevadm info --query=property --path=/sys/block/$dev)"
 
-        devname=$(printf "%s" "$devinfo" | perl -ne 'print "$1" if /^DEVNAME=(.*)/')
-        devtype=$(printf "%s" "$devinfo" | perl -ne 'print "$1" if /^ID_TYPE=(.*)/')
-        devbus=$(printf "%s" "$devinfo" | perl -ne 'print "$1" if /^ID_BUS=(.*)/')
+        #devname=$(printf "%s" "$devinfo" | perl -ne 'print "$1" if /^DEVNAME=(.*)/')
+        sed -n 's/.*DEVNAME=\([^;]*\).*/\1/p' <<< $devinfo
+        #devtype=$(printf "%s" "$devinfo" | perl -ne 'print "$1" if /^ID_TYPE=(.*)/')
+        #devbus=$(printf "%s" "$devinfo" | perl -ne 'print "$1" if /^ID_BUS=(.*)/')
 
         if [ "${devtype,,}" = "disk" ] && { [ "${devbus,,}" = "ata" ] || [ "${devbus,,}" = "ata" ]; }; then
             DISK="$devname"
