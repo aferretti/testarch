@@ -24,7 +24,7 @@ setEnvironmentVariables() {
     if [ ! -d $SCRIPTS_DIR ]; then return 2; fi
     if [ ! -d $CONFIGS_DIR ]; then return 3; fi
     if [ ! -d $ASSETS_DIR ]; then return 4; fi
-    if [ ! -d $LOGS_DIR ]; then return 5; fi
+    #if [ ! -d $LOGS_DIR ]; then return 5; fi
 
     return 0
 }
