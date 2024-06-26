@@ -7,8 +7,8 @@ source ${HOME}/archinstall/configs/env.conf
 source ${CONFIGS_DIR}/setup.conf
 
 # Caricamento file helpers.sh
-source ${SCRIPTS_DIR}/helpers.sh
-echo $DISK
+#source ${SCRIPTS_DIR}/helpers.sh
+#echo $DISK
 
 setUsers() {
     printf "root:${PASSWD}" | chpasswd
