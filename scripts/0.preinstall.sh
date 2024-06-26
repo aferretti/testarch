@@ -48,7 +48,6 @@ getFirstDiskAvailable() {
         devtype=$( sed -n 's/.*ID_TYPE=\([^;]*\).*/\1/p' <<< $devinfo )
         devbus=$( sed -n 's/.*ID_BUS=\([^;]*\).*/\1/p' <<< $devinfo )
 
-echo $devname $devtype $devbus
         #devname=$(printf "%s" "$devinfo" | perl -ne 'print "$1" if /^DEVNAME=(.*)/')
         #devtype=$(printf "%s" "$devinfo" | perl -ne 'print "$1" if /^ID_TYPE=(.*)/')
         #devbus=$(printf "%s" "$devinfo" | perl -ne 'print "$1" if /^ID_BUS=(.*)/')
@@ -169,7 +168,6 @@ getDisk
 waitForInput
 
 # Esecuzione delle operazioni preliminari alla procedura di installazione
-: '
 clear
 showHeader "pluto" 
 
@@ -177,6 +175,7 @@ setTime
 setDisk
 waitForInput
 
+: '
 clear
 initPacman
 waitForInput
