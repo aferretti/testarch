@@ -48,10 +48,6 @@ getFirstDiskAvailable() {
         devtype=$( sed -n 's/.*ID_TYPE=\([^;]*\).*/\1/p' <<< $devinfo )
         devbus=$( sed -n 's/.*ID_BUS=\([^;]*\).*/\1/p' <<< $devinfo )
 
-        #devname=$(printf "%s" "$devinfo" | perl -ne 'print "$1" if /^DEVNAME=(.*)/')
-        #devtype=$(printf "%s" "$devinfo" | perl -ne 'print "$1" if /^ID_TYPE=(.*)/')
-        #devbus=$(printf "%s" "$devinfo" | perl -ne 'print "$1" if /^ID_BUS=(.*)/')
-
         if [ "${devtype,,}" = "disk" ] && { [ "${devbus,,}" = "ata" ] || [ "${devbus,,}" = "scsi" ]; }; then
             DISK="$devname"
             return
@@ -175,11 +171,11 @@ setTime
 setDisk
 waitForInput
 
-: '
 clear
 initPacman
 waitForInput
 
+: '
 clear
 clone
 initFSTable
