@@ -2,12 +2,11 @@
 
 # Caricamento file env.conf
 source ${HOME}/archinstall/configs/env.conf
-echo "CFG" $CONFIGS_DIR
 
 # Caricamento file setup.conf
-#source ${CONFIGS_DIR}/setup.conf
-source /mnt/root/archinstall/configs/setup.conf
+source ${CONFIGS_DIR}/setup.conf
 echo "CONFIGS" ${CONFIGS_DIR}
+echo "PASSWD" ${PASSWD}
 exit
 
 # Caricamento file helpers.sh
