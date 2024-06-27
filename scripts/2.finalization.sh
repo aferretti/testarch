@@ -51,6 +51,7 @@ cleanup() {
 prepareUserScripts() {
     scriptsPath="/home/${USER}/startup"
     configFile="${scriptsPath}/env.conf"
+    useDocker=true
 
     if [ ! -d ${scriptsPath} ]; then 
         mkdir "${scriptsPath}"
@@ -62,10 +63,12 @@ prepareUserScripts() {
         checkError 'touch "${configFile}"'
     fi
 
+    if [ "${STACK,,}" != "docker" ]; then useDocker=false; fi
+    
     echo "PROJECT_NAME=${APP,}" >> ${configFile}    
     echo "WORKSPACE_FOLDER=~/workspace/${APP,,}" >> ${configFile}
-    echo "TTY_SYMLINK_ALIAS=${}" >> ${configFile}
-    echo "USE_DOCKER=${}" >> ${configFile}
+    if [ "${APP,,}" = "neuron" ]; then echo "TTY_SYMLINK_ALIAS=ttyEUBOX" >> ${configFile}; fi
+    echo "USE_DOCKER=${useDocker}" >> ${configFile}
 
     cp "${SCRIPTS_DIR}/4.app.sh" "${scriptsPath}/"
     checkError 'cp "${SCRIPTS_DIR}/4.app.sh" "${scriptsPath}/"'
