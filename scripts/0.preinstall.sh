@@ -45,6 +45,8 @@ doChecks() {
 }
 
 getParameters() {
+    echo $1 $2 $3 $4
+    
     APP="$1"
     STACK="$2"
     DEVID="$3"
