@@ -8,7 +8,7 @@ setEnvironmentVariables() {
     LOGS_DIR=${BASE_DIR}/logs
     INSTALL_LOG=${LOGS_DIR}/"$( date "+%Y%m%d-%H%M%S" ).log" 
 
-    echo "$1" 
+    echo $1 
     PARAM_APP="$1"
     PARAM_STACK="$2"
     PARAM_DEVID="$3"
