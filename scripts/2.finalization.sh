@@ -10,13 +10,23 @@ source ${CONFIGS_DIR}/setup.conf
 source ${SCRIPTS_DIR}/helpers.sh
 
 installOpenbox() {
-    pacman -S openbox xorg-server xorg-xinit xorg-fonts-misc xterm --noconfirm --needed
+    homePath="/home/${USER}"
 
-    cp /etc/X11/xinit/xinitrc ~/.xinitrc
+    pacman -S openbox xorg-server xorg-xinit xorg-fonts-misc xterm --noconfirm --needed
+    checkError "pacman -S openbox xorg-server xorg-xinit xorg-fonts-misc xterm --noconfirm --needed"
+
+    cp "/etc/X11/xinit/xinitrc" "${homePath}/.xinitrc"
+    checkError "cp \"/etc/X11/xinit/xinitrc\" \"${homePath}/.xinitrc\""
+
+    mkdir -p "${homePath}/.config/openbox"
+    checkError "mkdir -p \"${homePath}/.config/openbox\""
+
+    cp -a "/etc/xdg/openbox/" "${homePath}/.config/"
+    checkError "cp -a \"/etc/xdg/openbox/\" \"${homePath}/.config/\""
 }
 
 setHostname() {
-    hostnameFile=/etc/hostname
+    hostnameFile="/etc/hostname"
 
     if [ ! f ${hostnameFile} ]; then 
         rm -f ${hostnameFile}
@@ -30,12 +40,12 @@ setHostname() {
 }
 
 cleanup() {
-    rm -r ${HOME}/ArchInstall
+    rm -r "${HOME}/ArchInstall"
     checkError "rm -r ${HOME}/ArchInstall"
 }
 
 prepareUserScripts() {
-    scriptsPath=/home/${USER}/startup
+    scriptsPath="/home/${USER}/startup"
     configFile="${scriptsPath}/env.conf"
 
     if [ ! -d $scriptsPath ]; then 

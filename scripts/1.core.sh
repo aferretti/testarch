@@ -68,7 +68,19 @@ setTimezoneAndLocale() {
     checkError "localectl --no-ask-password set-keymap ${KEYMAP}"
 }
 
+setupGrubFile() {
+    grubFile=/etc/default/grub
+
+    sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' $grubFile
+    checkError "sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' $grubFile"
+
+    sed -i "s|^GRUB_DISTRIBUTOR=.*|GRUB_DISTRIBUTOR=${APP,}|" $grubFile
+    checkError "sed -i \"s|^GRUB_DISTRIBUTOR=.*|GRUB_DISTRIBUTOR=${APP,}|\" $grubFile"
+}
+
 configureGrub() {
+    setupGrubFile
+
     grub-install --target=${PLATFORM} --efi-directory=/boot --bootloader-id=grub ${DISK}
     checkError "grub-install --target=${PLATFORM} --efi-directory=/boot --bootloader-id=grub ${DISK}"
 
@@ -97,25 +109,23 @@ setAutologin() {
 
 # Inizializzazione degli utenti e delle password e installazione packages sistema operativo e abilitazione servizi
 clear
-showHeader "core"
+showHeader "Users setup and base/linux packages installation"
 
 setUsers
 installBasePackages
-waitForInput
-
-clear
 installLinuxPackages
-waitForInput
 
 # Impostazioni timezone, locale e preparazione GRUB
 clear
-showHeader "timezone"
+showHeader "Date/Time, Locales and Grub setup"
 
 setTimezoneAndLocale
 configureGrub
 waitForInput
 
+# Setup default editor e autologin
 clear
+showHeader "Default editor and autologin setup"
+
 setDefaultEditor
 setAutologin
-waitForInput
