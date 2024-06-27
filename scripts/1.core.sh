@@ -115,8 +115,8 @@ setAutologin() {
     mkdir -p /etc/systemd/system/getty@tty1.service.d
     checkError "mkdir -p /etc/systemd/system/getty@tty1.service.d"
 
-    cp ${ASSETS_DIR}/autologin.conf /etc/systemd/system/getty@tty1.service.d/*
-    checkError "cp ${ASSETS_DIR}/autologin.conf /etc/systemd/system/getty@tty1.service.d/*"
+    cp ${ASSETS_DIR}/autologin.conf /etc/systemd/system/getty@tty1.service.d
+    checkError "cp ${ASSETS_DIR}/autologin.conf /etc/systemd/system/getty@tty1.service.d"
 
     sed -i "|s[[USER]]|${USERNAME}|g" /etc/systemd/system/getty@tty1.service.d/autologin.conf
     checkError "sed -i \"|s[[USER]]|${USERNAME}|g\" /etc/systemd/system/getty@tty1.service.d/autologin.conf"
