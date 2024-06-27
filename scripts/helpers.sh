@@ -33,5 +33,6 @@ checkError() {
 }
 
 waitForInput() {
+    printf "Waiting for you..."
     read -n 1 -s
 }

@@ -64,7 +64,7 @@ prepareUserScripts() {
     fi
 
     if [ "${STACK,,}" != "docker" ]; then useDocker=false; fi
-    
+
     echo "PROJECT_NAME=${APP,}" >> ${configFile}    
     echo "WORKSPACE_FOLDER=~/workspace/${APP,,}" >> ${configFile}
     if [ "${APP,,}" = "neuron" ]; then echo "TTY_SYMLINK_ALIAS=ttyEUBOX" >> ${configFile}; fi
@@ -89,7 +89,7 @@ umountAndReboot() {
 clear
 showHeader "Setup finalization"
 
-installOpenbox
+#installOpenbox
 setHostname
 
 prepareUserScripts

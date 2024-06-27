@@ -120,6 +120,8 @@ clear
 showHeader "Date/Time, Locales and Grub setup"
 
 setTimezoneAndLocale
+waitForInput
+
 configureGrub
 waitForInput
 
@@ -129,3 +131,4 @@ showHeader "Default editor and autologin setup"
 
 setDefaultEditor
 setAutologin
+waitForInput
