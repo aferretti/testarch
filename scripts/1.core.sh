@@ -92,7 +92,7 @@ setupGrubFile() {
     sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' $grubFile
     checkError "sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' $grubFile"
 
-    sed -i "s|^GRUB_DISTRIBUTOR=.*|GRUB_DISTRIBUTOR=${APP,}|" $grubFile
+    sed -i "s|^GRUB_DISTRIBUTOR=.*|GRUB_DISTRIBUTOR=\"${APP^^}\"|" $grubFile
     checkError "sed -i \"s|^GRUB_DISTRIBUTOR=.*|GRUB_DISTRIBUTOR=\"${APP^^}\"|\" $grubFile"
 }
 
