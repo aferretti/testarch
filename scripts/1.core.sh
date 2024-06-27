@@ -63,8 +63,8 @@ setTimezoneAndLocale() {
 
     localeFile="${ASSETS_DIR}/locale.conf"    
     if [ -f /etc/locale.conf ]; then 
-        rm $localeFile
-        checkError "rm $localeFile"
+        rm /etc/locale.conf
+        checkError "rm /etc/locale.conf"
     fi
 
     cp ${localeFile} /etc
@@ -75,8 +75,8 @@ setTimezoneAndLocale() {
 
     consoleFile="${ASSETS_DIR}/vconsole.conf"
     if [ -f /etc/vconsole.conf ]; then 
-        rm $consoleFile
-        checkError "rm $consoleFile"
+        rm /etc/vconsole.conf
+        checkError "rm /etc/vconsole.conf"
     fi
 
     cp ${consoleFile} /etc
