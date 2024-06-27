@@ -44,15 +44,6 @@ doChecks() {
     isPacmanOk
 }
 
-getParameters() {
-    echo $PARAM_APP $PARAM_STACK $PARAM_DEVID $PARAM_DEVIP
-
-    APP="$1"
-    STACK="$2"
-    DEVID="$3"
-    DEVIP="$4"
-}
-
 getFirstDiskAvailable() {
     DISK=""
 
@@ -173,13 +164,10 @@ clone() {
 }
 
 # Esecuzione verifiche preliminari alla procedura di installazione
-#clear
+clear
 showHeader "Preliminary checks and parameters/disk setup"
 
 doChecks
-getParameters
-
-: '
 getDisk
 
 # Esecuzione delle operazioni preliminari alla procedura di installazione
@@ -193,11 +181,9 @@ setTime
 setDisk
 initPacman
 
-
 # Preparazione della FSTable e clonazione degli script per esecuzione in arch-chroot
 clear
 showHeader "Pacman initialization" 
 
 initFSTable
 clone
-'
