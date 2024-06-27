@@ -21,6 +21,7 @@ setEnvironmentVariables() {
     if [ ! -d $LOGS_DIR ]; then mkdir $LOGS_DIR; fi
     if [ ! -f $INSTALL_LOG ]; then touch -f $INSTALL_LOG; fi
 
+    echo $3
     return 0
 }
 
@@ -28,7 +29,7 @@ echo $1
     
 # inizializzazione variabili ambiente per procedura di installazione
 setEnvironmentVariables
-
+echo $2
 if [ $? -eq 0 ]; then
     # caricamento del file helpers.h
     source "$SCRIPTS_DIR/helpers.sh"
