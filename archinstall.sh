@@ -19,6 +19,12 @@ setEnvironmentVariables() {
     return 0
 }
 
+checkIp() {
+    if [ ! -z "$1" ]; then 
+        [[ "$1" =~ ^[0-9]+(\.[0-9]+){3}$ ]] || saveLogAndExit "Value $1 is not a valid ip address"
+    fi
+}
+
 setParameters() {
     if [ ! -z "$PARAM_APP" ]; then
         if [ "${PARAM_APP,,}" != "neuron" ] && [ "${PARAM_APP,,}" != "fenice" ]; then saveLogAndExit "Value ${PARAM_APP} not valid for parameter APP" ; fi
@@ -39,6 +45,7 @@ setParameters() {
     fi
 
     if [ ! -z "$PARAM_DEVIP" ]; then
+        checkIp ${PARAM_DEVIP}
         sed -i "s|^DEVIP=|DEVIP=${PARAM_DEVIP}|" $CONFIGS_DIR/setup.conf
     fi
 }
