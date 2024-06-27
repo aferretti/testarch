@@ -148,6 +148,11 @@ clone() {
     configPath="${targetPath}/configs"
     configFile="${configPath}/env.conf"
 
+    if [ ! -d $targetPath ]; then
+        mkdir $targetPath
+        checkError "mkdir $targetPath"
+    fi
+    
     cp -R ${BASE_DIR}/* ${targetPath}
     checkError "cp -R ${BASE_DIR}/* ${targetPath}"
 
