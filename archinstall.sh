@@ -44,6 +44,7 @@ PARAM_DEVIP="$4"
     
 # inizializzazione variabili ambiente per procedura di installazione
 setEnvironmentVariables
+setParameters
 
 if [ $? -eq 0 ]; then
     # caricamento del file helpers.h
