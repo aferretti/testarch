@@ -128,11 +128,11 @@ setAutologin() {
 # Inizializzazione degli utenti e delle password e installazione packages sistema operativo e abilitazione servizi
 clear
 showHeader "Users setup and base/linux packages installation"
-
+: '
 setUsers
 installBasePackages
 installLinuxPackages
-
+'
 # Impostazioni timezone, locale e preparazione GRUB
 clear
 showHeader "Date/Time, Locales and Grub setup"

@@ -148,8 +148,8 @@ clone() {
     configPath="${targetPath}/configs"
     configFile="${configPath}/env.conf"
 
-    cp -R ${BASE_DIR} ${targetPath}
-    checkError "cp -R ${BASE_DIR} ${targetPath}"
+    cp -R ${BASE_DIR}/* ${targetPath}
+    checkError "cp -R ${BASE_DIR}/* ${targetPath}"
 
     touch -f "${configFile}"
     checkError 'touch -f "${configFile}'
