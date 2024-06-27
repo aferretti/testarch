@@ -63,7 +63,7 @@ getDisk() {
         saveLog "ERROR! No available disks ata or scsi found"
         exit 
     else
-        sed -i "s/^DISK=/DISK=${DISK}/" $CONFIGS_DIR/setup.conf
+        sed -i 's/^DISK=/DISK="${DISK}"/' $CONFIGS_DIR/setup.conf
     fi
 }
 
@@ -164,6 +164,7 @@ doChecks
 getDisk
 
 # Esecuzione delle operazioni preliminari alla procedura di installazione
+: '
 clear
 showHeader "pluto" 
 
@@ -176,3 +177,4 @@ initPacman
 clear
 clone
 initFSTable
+'
