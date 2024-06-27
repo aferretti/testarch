@@ -9,16 +9,32 @@ setEnvironmentVariables() {
     INSTALL_LOG=${LOGS_DIR}/"$( date "+%Y%m%d-%H%M%S" ).log" 
     set +a
 
-    if [ ! -d $SCRIPTS_DIR ]; then return 2; fi
-    if [ ! -d $CONFIGS_DIR ]; then return 3; fi
-    if [ ! -d $ASSETS_DIR ]; then return 4; fi
+    if [ ! -d $SCRIPTS_DIR ]; then return 1; fi
+    if [ ! -d $CONFIGS_DIR ]; then return 1; fi
+    if [ ! -d $ASSETS_DIR ]; then return 1; fi
 
     if [ ! -d $LOGS_DIR ]; then mkdir $LOGS_DIR; fi
     if [ ! -f $INSTALL_LOG ]; then touch -f $INSTALL_LOG; fi
 
-    echo $PARAM_APP $PARAM_STACK $PARAM_DEVID $PARAM_DEVIP
-    
     return 0
+}
+
+setParameters() {
+    if [ ! -z "$PARAM_APP" ]; then
+        sed -i "s|^APP=|APP=${PARAM_APP}|" $CONFIGS_DIR/setup.conf
+    fi
+
+    if [ ! -z "$PARAM_STACK" ]; then
+        sed -i "s|^STACK=|STACK=${PARAM_STACK}|" $CONFIGS_DIR/setup.conf
+    fi
+
+    if [ ! -z "$PARAM_DEVID" ]; then
+        sed -i "s|^DEVID=|DEVID=${PARAM_DEVID}|" $CONFIGS_DIR/setup.conf
+    fi
+
+    if [ ! -z "$PARAM_DEVIP" ]; then
+        sed -i "s|^DEVIP=|DEVIP=${PARAM_DEVIP}|" $CONFIGS_DIR/setup.conf
+    fi
 }
 
 PARAM_APP="$1"
@@ -28,7 +44,7 @@ PARAM_DEVIP="$4"
     
 # inizializzazione variabili ambiente per procedura di installazione
 setEnvironmentVariables
-echo $2
+
 if [ $? -eq 0 ]; then
     # caricamento del file helpers.h
     source "$SCRIPTS_DIR/helpers.sh"
