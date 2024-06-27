@@ -62,7 +62,7 @@ setTimezoneAndLocale() {
     checkError "locale-gen"
 
     localeFile="${ASSETS_DIR}/locale.conf"    
-    if [ -f $localeFile]; then 
+    if [ -f $localeFile ]; then 
         rm $localeFile
         checkError "rm $localeFile"
     fi
@@ -74,7 +74,7 @@ setTimezoneAndLocale() {
     checkError 'sed -i "s|^LANG=.*|LANG=${LANG}|" $localeFile'
 
     consoleFile="${ASSETS_DIR}/vconsole.conf"
-    if [ -f $consoleFile]; then 
+    if [ -f $consoleFile ]; then 
         rm $consoleFile
         checkError "rm $consoleFile"
     fi
