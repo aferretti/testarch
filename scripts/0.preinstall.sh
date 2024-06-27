@@ -158,7 +158,7 @@ clone() {
 
     echo "ASSETS_DIR=${targetPath}/assets" >> ${configFile}
     echo "SCRIPTS_DIR=${targetPath}/scripts" >> ${configFile}
-    echo "CONFIGS_DIR=${configPath}" >> ${configFile}
+    echo "CONFIGS_DIR=${targetPath}/configs" >> ${configFile}
     echo "LOGS_DIR=${targetPath}/logs" >> ${configFile}
     echo "INSTALL_LOG=${targetPath}/logs/$( date "+%Y%m%d-%H%M%S" ).log" >> ${configFile}
 }
