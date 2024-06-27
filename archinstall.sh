@@ -23,11 +23,15 @@ setParameters() {
     if [ ! -z "$PARAM_APP" ]; then
         if [ "${PARAM_APP,,}" != "neuron" ] && [ "${PARAM_APP,,}" != "fenice" ]; then saveLogAndExit "Value ${PARAM_APP} not valid for parameter APP" ; fi
         sed -i "s|^APP=|APP=${PARAM_APP}|" $CONFIGS_DIR/setup.conf
+    else
+        saveLogAndExit "No value specified for mandatory parameter APP"
     fi
 
     if [ ! -z "$PARAM_STACK" ]; then
         if [ "${PARAM_STACK,,}" != "docker" ] && [ "${PARAM_STACK,,}" != "mono" ]; then saveLogAndExit "Value ${PARAM_STACK} not valid for parameter STACK" ; fi
         sed -i "s|^STACK=|STACK=${PARAM_STACK}|" $CONFIGS_DIR/setup.conf
+    else
+        saveLogAndExit "No value specified for mandatory parameter STACK"
     fi
 
     if [ ! -z "$PARAM_DEVID" ]; then
