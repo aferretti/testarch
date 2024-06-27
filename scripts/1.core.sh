@@ -138,13 +138,13 @@ clear
 showHeader "Date/Time, Locales and Grub setup"
 
 #setTimezoneAndLocale
-configureGrub
+#configureGrub
 
 # Setup default editor e autologin
 clear
 showHeader "Default editor and autologin setup"
 
-setDefaultEditor
-#setAutologin
+#setDefaultEditor
+setAutologin
 
 waitForInput
