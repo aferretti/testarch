@@ -112,8 +112,15 @@ setDefaultEditor() {
 }
 
 setAutologin() {
-    mkdir -p /etc/systemd/system/getty@tty1.service.d
-    checkError "mkdir -p /etc/systemd/system/getty@tty1.service.d"
+    if [ ! -d /etc/systemd/system/getty@tty1.service.d ]; then
+        mkdir -p /etc/systemd/system/getty@tty1.service.d
+        checkError "mkdir -p /etc/systemd/system/getty@tty1.service.d"
+    fi
+
+    if [ -f /etc/systemd/system/getty@tty1.service.d ]; then
+        rm /etc/systemd/system/getty@tty1.service.d
+        checkError "rm /etc/systemd/system/getty@tty1.service.d"
+    fi
 
     cp ${ASSETS_DIR}/autologin.conf /etc/systemd/system/getty@tty1.service.d
     checkError "cp ${ASSETS_DIR}/autologin.conf /etc/systemd/system/getty@tty1.service.d"
