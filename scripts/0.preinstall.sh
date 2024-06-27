@@ -45,10 +45,10 @@ doChecks() {
 }
 
 getParameters() {
-    $APP="$1"
-    $STACK="$2"
-    $DEVID="$3"
-    $DEVIP="$4"
+    APP="$1"
+    STACK="$2"
+    DEVID="$3"
+    DEVIP="$4"
 }
 
 getFirstDiskAvailable() {
