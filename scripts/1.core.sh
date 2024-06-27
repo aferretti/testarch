@@ -5,7 +5,10 @@ source ${HOME}/archinstall/configs/env.conf
 echo $CONFIGS_DIR
 
 # Caricamento file setup.conf
-source ${CONFIGS_DIR}/setup.conf
+#source ${CONFIGS_DIR}/setup.conf
+source /mnt/root/archinstall/configs/setup.conf
+echo "CONFIGS" ${CONFIGS_DIR}
+exit
 
 # Caricamento file helpers.sh
 source ${SCRIPTS_DIR}/helpers.sh
