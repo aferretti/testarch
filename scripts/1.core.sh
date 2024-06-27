@@ -13,7 +13,7 @@ setUsers() {
     printf "root:${PASSWD}" | chpasswd
     checkError "printf \"root:${PASSWD}\" | chpasswd"
 
-    alreadyExists="$(grep '${USER}' /etc/passwd)"
+    alreadyExists=$(grep '${USER}' /etc/passwd)
     echo "ae" $alreadyExists
     waitForInput
 
