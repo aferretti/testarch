@@ -21,6 +21,7 @@ setEnvironmentVariables() {
 
 setParameters() {
     if [ ! -z "$PARAM_APP" ]; then
+        if [ "${PARAM_APP,,}" -ne "neuron" ] || [ "${PARAM_APP,,}" -ne "fenice" ]; then checkError "cazzo" ; fi
         sed -i "s|^APP=|APP=${PARAM_APP}|" $CONFIGS_DIR/setup.conf
     fi
 
@@ -44,11 +45,13 @@ PARAM_DEVIP="$4"
     
 # inizializzazione variabili ambiente per procedura di installazione
 setEnvironmentVariables
-setParameters
 
 if [ $? -eq 0 ]; then
     # caricamento del file helpers.h
     source "$SCRIPTS_DIR/helpers.sh"
+
+    # preparazione dei parametri di lavoro
+    setParameters
 
     # esecuzione dello script di pre-installazione
     ( bash ${SCRIPTS_DIR}/0.preinstall.sh )
