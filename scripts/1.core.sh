@@ -2,6 +2,7 @@
 
 # Caricamento file env.conf
 source ${HOME}/archinstall/configs/env.conf
+echo $CONFIGS_DIR
 
 # Caricamento file setup.conf
 source ${CONFIGS_DIR}/setup.conf
