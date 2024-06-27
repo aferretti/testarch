@@ -2,12 +2,9 @@
 
 # Caricamento file env.conf
 source ${HOME}/archinstall/configs/env.conf
-echo "CONFIGS" ${CONFIGS_DIR}
 
 # Caricamento file setup.conf
 source ${CONFIGS_DIR}/setup.conf
-echo "PASSWD" ${PASSWD}
-exit
 
 # Caricamento file helpers.sh
 source ${SCRIPTS_DIR}/helpers.sh
@@ -123,15 +120,13 @@ clear
 showHeader "Date/Time, Locales and Grub setup"
 
 setTimezoneAndLocale
-waitForInput
-
 configureGrub
-waitForInput
 
 # Setup default editor e autologin
+: '
 clear
 showHeader "Default editor and autologin setup"
 
 setDefaultEditor
 setAutologin
-waitForInput
+'
