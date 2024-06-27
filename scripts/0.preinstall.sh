@@ -173,7 +173,7 @@ clone() {
 }
 
 # Esecuzione verifiche preliminari alla procedura di installazione
-clear
+#clear
 showHeader "Preliminary checks and parameters/disk setup"
 
 doChecks
