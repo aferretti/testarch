@@ -98,6 +98,7 @@ installOpenbox
 setHostname
 
 prepareUserScripts
+waitForInput 
 
 #cleanup
 #umountAndReboot
