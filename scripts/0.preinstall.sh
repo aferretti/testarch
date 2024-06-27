@@ -14,7 +14,13 @@ isRoot() {
 }
 
 isOnline() {
-    echo "TODO"
+    nc -z 8.8.8.8 53  >/dev/null 2>&1
+    online=$?
+
+    if [ $online -ne 0 ]; then
+        saveLog "ERROR! This script must be run with a working Internet connection"
+        exit
+    fi
 }
 
 isArchOS() {
@@ -36,6 +42,13 @@ doChecks() {
     isArchOS
     isOnline
     isPacmanOk
+}
+
+getParameters() {
+    $APP="$1"
+    $STACK="$2"
+    $DEVID="$3"
+    $DEVIP="$4"
 }
 
 getFirstDiskAvailable() {
@@ -64,6 +77,7 @@ getDisk() {
         exit 
     else
         sed -i "s|^DISK=|DISK=${DISK}|" $CONFIGS_DIR/setup.conf
+        checkError "sed -i \"s|^DISK=|DISK=${DISK}|\" $CONFIGS_DIR/setup.conf"
     fi
 }
 
@@ -158,23 +172,28 @@ clone() {
 
 # Esecuzione verifiche preliminari alla procedura di installazione
 clear
-showHeader "ciccio"
+showHeader "Preliminary checks and parameters/disk setup"
 
 doChecks
+getParameters
+: '
 getDisk
 
 # Esecuzione delle operazioni preliminari alla procedura di installazione
-: '
+# 1. Impostazione di timezone e ntp
+# 2. Partizionamento disco, formattazione e mounting volumi
+# 3. Inizializzazione pacman e installazione package base sistema operativo
 clear
-showHeader "pluto" 
+showHeader "Date/Time Setup, Disk preparation and Pacman initialization" 
 
 setTime
 setDisk
-
-clear
 initPacman
 
+# Preparazione della FSTable e clonazione degli script per l'esecuzione in arch-chroot
 clear
-clone
+showHeader "Pacman initialization" 
+
 initFSTable
+clone
 '
