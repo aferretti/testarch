@@ -14,6 +14,11 @@ saveLog() {
     printf "%s\n" "$messageToLog" | tee -a "${INSTALL_LOG}"
 }
 
+saveLogAndExit() {
+    saveLog
+    exit
+}
+
 checkError() {
     if [ $? -ne 0 ]; then
         if [ -n "$1" ]; then 
