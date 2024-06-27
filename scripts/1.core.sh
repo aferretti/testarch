@@ -13,14 +13,14 @@ setUsers() {
     printf "root:${PASSWD}" | chpasswd
     checkError "printf \"root:${PASSWD}\" | chpasswd"
 
-    alreadyExists=$(grep "^${USER}:" /etc/passwd)
+    alreadyExists=$(grep "^${USERNAME}:" /etc/passwd)
     if [ -z $alreadyExists ]; then
-        useradd -m -g users -G wheel ${USER}
-        checkError "useradd -m -g users -G wheel ${USER}"
+        useradd -m -g users -G wheel ${USERNAME}
+        checkError "useradd -m -g users -G wheel ${USERNAME}"
     fi
 
-    printf "${USER}:${PASSWD}" | chpasswd
-    checkError "printf \"${USER}:${PASSWD}\" | chpasswd"
+    printf "${USERNAME}:${PASSWD}" | chpasswd
+    checkError "printf \"${USERNAME}:${PASSWD}\" | chpasswd"
 
     sed -i 's/^%wheel ALL=(ALL:ALL) NOPASSWD: ALL/# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers
     checkError "sed -i 's/^%wheel ALL=(ALL:ALL) NOPASSWD: ALL/# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers"
@@ -61,11 +61,29 @@ setTimezoneAndLocale() {
     locale-gen
     checkError "locale-gen"
 
-    localectl --no-ask-password set-locale ${LANG}
-    checkError "localectl --no-ask-password set-locale ${LANG}"
+    localeFile="${ASSETS_DIR}/locale.conf"    
+    if [ -f $localeFile]; then 
+        rm $localeFile
+        checkError "rm $localeFile"
+    fi
 
-    localectl --no-ask-password set-keymap ${KEYMAP}
-    checkError "localectl --no-ask-password set-keymap ${KEYMAP}"
+    cp ${localeFile} /etc
+    checkError "cp ${localeFile} /etc"
+
+    sed -i "s|^LANG=.*|LANG=${LANG}|" $localeFile
+    checkError 'sed -i "s|^LANG=.*|LANG=${LANG}|" $localeFile'
+
+    consoleFile="${ASSETS_DIR}/vconsole.conf"
+    if [ -f $consoleFile]; then 
+        rm $consoleFile
+        checkError "rm $consoleFile"
+    fi
+
+    cp ${consoleFile} /etc
+    checkError "cp ${consoleFile} /etc"
+
+    sed -i "s|^KEYMAP=.*|KEYMAP=${KEYMAP}|" $consoleFile
+    checkError 'sed -i "s|^KEYMAP=.*|KEYMAP=${KEYMAP}|" $consoleFile'
 }
 
 setupGrubFile() {
@@ -100,8 +118,8 @@ setAutologin() {
     cp ${ASSETS_DIR}/autologin.conf /etc/systemd/system/getty@tty1.service.d/*
     checkError "cp ${ASSETS_DIR}/autologin.conf /etc/systemd/system/getty@tty1.service.d/*"
 
-    sed -i "|s[[USER]]|${USER}|g" /etc/systemd/system/getty@tty1.service.d/autologin.conf
-    checkError "sed -i \"|s[[USER]]|${USER}|g\" /etc/systemd/system/getty@tty1.service.d/autologin.conf"
+    sed -i "|s[[USER]]|${USERNAME}|g" /etc/systemd/system/getty@tty1.service.d/autologin.conf
+    checkError "sed -i \"|s[[USER]]|${USERNAME}|g\" /etc/systemd/system/getty@tty1.service.d/autologin.conf"
 
     systemctl enable getty@tty1.service
     checkError "systemctl enable getty@tty1.service"
@@ -123,10 +141,10 @@ setTimezoneAndLocale
 configureGrub
 
 # Setup default editor e autologin
-: '
 clear
 showHeader "Default editor and autologin setup"
 
 setDefaultEditor
 setAutologin
-'
+
+waitForInput

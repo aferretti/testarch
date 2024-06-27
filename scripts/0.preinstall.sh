@@ -187,3 +187,5 @@ showHeader "Pacman initialization"
 
 initFSTable
 clone
+
+waitForInput
