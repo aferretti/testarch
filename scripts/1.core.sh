@@ -49,8 +49,6 @@ installLinuxPackages() {
 }
 
 setTimezoneAndLocale() {
-    echo "TZ" ${TIMEZONE} 
-    waitForInput
     ln -sf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime
     checkError "ln -sf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime"
 
@@ -139,14 +137,14 @@ showHeader "Users setup and base/linux packages installation"
 clear
 showHeader "Date/Time, Locales and Grub setup"
 
-setTimezoneAndLocale
-#configureGrub
+#setTimezoneAndLocale
+configureGrub
 
 # Setup default editor e autologin
 clear
 showHeader "Default editor and autologin setup"
 
-#setDefaultEditor
+setDefaultEditor
 #setAutologin
 
 waitForInput
