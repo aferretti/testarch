@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 setEnvironmentVariables() {
-    echo $1 
-    
     set -a
     BASE_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
     ASSETS_DIR=${BASE_DIR}/assets
@@ -26,6 +24,8 @@ setEnvironmentVariables() {
     return 0
 }
 
+echo $1 
+    
 # inizializzazione variabili ambiente per procedura di installazione
 setEnvironmentVariables
 
