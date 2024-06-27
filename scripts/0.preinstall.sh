@@ -57,19 +57,22 @@ getFirstDiskAvailable() {
 
 getDisk() {
     getFirstDiskAvailable
+    checkError "getFirstDiskAvailable"
 
     if [ -z $DISK ]; then
         saveLog "ERROR! No available disks ata or scsi found"
         exit 
     else
-        echo "trovato " $DISK
+        sed -i 's/^DISK=/DISK=${DISK}/' $CONFIGS_DIR/setup.conf
     fi
 }
 
 setTime() {
     timedatectl --no-ask-password set-timezone ${TIMEZONE}
+    checkError "timedatectl --no-ask-password set-timezone ${TIMEZONE}"
 
     timedatectl --no-ask-password set-ntp 1
+    checkError "timedatectl --no-ask-password set-ntp 1"
 }
 
 createVolumes() {
@@ -146,7 +149,6 @@ clone() {
 
     targetPath="${HOME}/archinstall"
 
-    #echo "BASE_DIR=${targetPath}" >> ${configFile}
     echo "ASSETS_DIR=${targetPath}/assets" >> ${configFile}
     echo "SCRIPTS_DIR=${targetPath}/scripts" >> ${configFile}
     echo "CONFIGS_DIR=${configPath}" >> ${configFile}

@@ -27,10 +27,10 @@ if [ $? -eq 0 ]; then
     source "$SCRIPTS_DIR/helpers.sh"
 
     # esecuzione dello script di pre-installazione
-    #( bash ${SCRIPTS_DIR}/0.preinstall.sh )
+    ( bash ${SCRIPTS_DIR}/0.preinstall.sh )
 
     # esecuzione dello script di installazione
-    ( arch-chroot /mnt ${HOME}/archinstall/scripts/1.core.sh )
+    #( arch-chroot /mnt ${HOME}/archinstall/scripts/1.core.sh )
 
     # esecuzione dello script di post-installazione
     #( arch-chroot /mnt ${HOME}/archinstall/scripts/2.finalization.sh )
