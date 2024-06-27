@@ -70,8 +70,13 @@ prepareUserScripts() {
     if [ "${APP,,}" = "neuron" ]; then echo "TTY_SYMLINK_ALIAS=ttyEUBOX" >> ${configFile}; fi
     echo "USE_DOCKER=${useDocker}" >> ${configFile}
 
-    cp "${SCRIPTS_DIR}/4.app.sh" "${scriptsPath}/"
-    checkError 'cp "${SCRIPTS_DIR}/4.app.sh" "${scriptsPath}/"'
+    if [ ! -f ${scriptsPath}/3.app.sh ]; then
+        rm ${scriptsPath}/3.app.sh
+        checkError "rm ${scriptsPath}/3.app.sh"
+    fi
+
+    cp ${SCRIPTS_DIR}/3.app.sh ${scriptsPath}/
+    checkError 'cp ${SCRIPTS_DIR}/3.app.sh ${scriptsPath}/'
 
     #TODO: mettere in bash.rc l'esecuzione dello startup
 }
