@@ -89,10 +89,10 @@ umountAndReboot() {
 clear
 showHeader "Setup finalization"
 
-#installOpenbox
+installOpenbox
 setHostname
 
 prepareUserScripts
 
-cleanup
-umountAndReboot
+#cleanup
+#umountAndReboot

@@ -136,22 +136,22 @@ setAutologin() {
 clear
 showHeader "Users setup and base/linux packages installation"
 
-#setUsers
-#installBasePackages
-#installLinuxPackages
+setUsers
+installBasePackages
+installLinuxPackages
 
 # Impostazioni timezone, locale e preparazione GRUB
 clear
 showHeader "Date/Time, Locales and Grub setup"
 
-#setTimezoneAndLocale
-#configureGrub
+setTimezoneAndLocale
+configureGrub
 
 # Setup default editor e autologin
 clear
 showHeader "Default editor and autologin setup"
 
-#setDefaultEditor
+setDefaultEditor
 setAutologin
 
 waitForInput
