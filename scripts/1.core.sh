@@ -13,11 +13,11 @@ setUsers() {
     printf "root:${PASSWD}" | chpasswd
     checkError "printf \"root:${PASSWD}\" | chpasswd"
 
-    alreadyExists=( grep '${USER}' /etc/passwd )
+    alreadyExists="$(grep '${USER}' /etc/passwd)"
     echo "ae" $alreadyExists
     waitForInput
 
-    if [ grep '${USER}' /etc/passwd -eq 1 ]; then
+    if [ $alreadyExists -eq 1 ]; then
         echo "adduser"
         useradd -m -g users -G wheel ${USER}
         checkError "useradd -m -g users -G wheel ${USER}"
