@@ -35,18 +35,18 @@ setParameters() {
 
     if [ ! -z "$PARAM_STACK" ]; then
         if [ "${PARAM_STACK,,}" != "docker" ] && [ "${PARAM_STACK,,}" != "mono" ]; then saveLogAndExit "Value ${PARAM_STACK} not valid for parameter STACK" ; fi
-        sed -i "s|^STACK=|STACK=${PARAM_STACK}|" $CONFIGS_DIR/setup.conf
+        sed -i "s|^STACK=.*|STACK=${PARAM_STACK}|" $CONFIGS_DIR/setup.conf
     else
         saveLogAndExit "No value specified for mandatory parameter STACK"
     fi
 
     if [ ! -z "$PARAM_DEVID" ]; then
-        sed -i "s|^DEVID=|DEVID=${PARAM_DEVID}|" $CONFIGS_DIR/setup.conf
+        sed -i "s|^DEVID=.*|DEVID=${PARAM_DEVID}|" $CONFIGS_DIR/setup.conf
     fi
 
     if [ ! -z "$PARAM_DEVIP" ]; then
         checkIp ${PARAM_DEVIP}
-        sed -i "s|^DEVIP=|DEVIP=${PARAM_DEVIP}|" $CONFIGS_DIR/setup.conf
+        sed -i "s|^DEVIP=.*|DEVIP=${PARAM_DEVIP}|" $CONFIGS_DIR/setup.conf
     fi
 }
 
