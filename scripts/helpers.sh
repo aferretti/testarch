@@ -15,7 +15,7 @@ saveLog() {
 }
 
 saveLogAndExit() {
-    saveLog
+    saveLog "$1"
     exit
 }
 
