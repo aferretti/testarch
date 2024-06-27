@@ -15,8 +15,6 @@ setUsers() {
 
     alreadyExists=$(grep "^${USER}:" /etc/passwd)
     if [ -z $alreadyExists ]; then
-        echo "ci sono"
-        exit
         useradd -m -g users -G wheel ${USER}
         checkError "useradd -m -g users -G wheel ${USER}"
     fi
