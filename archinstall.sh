@@ -28,9 +28,7 @@ checkIp() {
 setParameters() {
     if [ ! -z "$PARAM_APP" ]; then
         if [ "${PARAM_APP,,}" != "neuron" ] && [ "${PARAM_APP,,}" != "fenice" ]; then saveLogAndExit "Value ${PARAM_APP} not valid for parameter APP" ; fi
-
-        sed -i "s|^APP=|APP=|" $CONFIGS_DIR/setup.conf
-        sed -i "s|^APP=|APP=${PARAM_APP}|" $CONFIGS_DIR/setup.conf
+        sed -i "s|^APP=.*|APP=${PARAM_APP}|" $CONFIGS_DIR/setup.conf
     else
         saveLogAndExit "No value specified for mandatory parameter APP"
     fi
