@@ -176,6 +176,7 @@ showHeader "Preliminary checks and parameters/disk setup"
 
 doChecks
 getParameters
+
 : '
 getDisk
 
@@ -190,7 +191,8 @@ setTime
 setDisk
 initPacman
 
-# Preparazione della FSTable e clonazione degli script per l'esecuzione in arch-chroot
+
+# Preparazione della FSTable e clonazione degli script per esecuzione in arch-chroot
 clear
 showHeader "Pacman initialization" 
 

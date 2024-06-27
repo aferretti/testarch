@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 showHeader() {
-    echo "showHeader - TODO"
+    #echo "showHeader - TODO"
     if [ -n "$1" ]; then echo "$1"; fi
 }
 
