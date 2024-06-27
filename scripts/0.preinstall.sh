@@ -152,7 +152,7 @@ clone() {
         mkdir $targetPath
         checkError "mkdir $targetPath"
     fi
-    
+
     cp -R ${BASE_DIR}/* ${targetPath}
     checkError "cp -R ${BASE_DIR}/* ${targetPath}"
 
@@ -188,7 +188,7 @@ initPacman
 
 # Preparazione della FSTable e clonazione degli script per esecuzione in arch-chroot
 clear
-showHeader "Pacman initialization" 
+showHeader "FSTable initialization and resources cloning" 
 
 initFSTable
 clone

@@ -49,6 +49,8 @@ installLinuxPackages() {
 }
 
 setTimezoneAndLocale() {
+    echo "TZ" ${TIMEZONE} 
+    waitForInput
     ln -sf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime
     checkError "ln -sf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime"
 
@@ -70,7 +72,7 @@ setTimezoneAndLocale() {
     cp ${localeFile} /etc
     checkError "cp ${localeFile} /etc"
 
-    sed -i "s|^LANG=.*|LANG=${LANG}|" $localeFile
+    sed -i "s|^LANG=.*|LANG=${LANG}|" /etc/locale.conf
     checkError 'sed -i "s|^LANG=.*|LANG=${LANG}|" $localeFile'
 
     consoleFile="${ASSETS_DIR}/vconsole.conf"
@@ -82,7 +84,7 @@ setTimezoneAndLocale() {
     cp ${consoleFile} /etc
     checkError "cp ${consoleFile} /etc"
 
-    sed -i "s|^KEYMAP=.*|KEYMAP=${KEYMAP}|" $consoleFile
+    sed -i "s|^KEYMAP=.*|KEYMAP=${KEYMAP}|" /etc/vconsole.conf
     checkError 'sed -i "s|^KEYMAP=.*|KEYMAP=${KEYMAP}|" $consoleFile'
 }
 
@@ -129,9 +131,9 @@ setAutologin() {
 clear
 showHeader "Users setup and base/linux packages installation"
 
-setUsers
-installBasePackages
-installLinuxPackages
+#setUsers
+#installBasePackages
+#installLinuxPackages
 
 # Impostazioni timezone, locale e preparazione GRUB
 clear
