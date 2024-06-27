@@ -16,8 +16,9 @@ setUsers() {
     alreadyExists=( grep '${USER}' /etc/passwd )
     echo "ae" $alreadyExists
     waitForInput
-    
-    if [ $alreadyExists -eq 1 ]; then
+
+    if [ grep '${USER}' /etc/passwd -eq 1 ]; then
+        echo "adduser"
         useradd -m -g users -G wheel ${USER}
         checkError "useradd -m -g users -G wheel ${USER}"
     fi
