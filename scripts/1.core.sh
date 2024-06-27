@@ -15,7 +15,7 @@ setUsers() {
 
     alreadyExists=( grep '${USER}' /etc/passwd )
     #if [ $alreadyExists -eq 1 ]; then
-    if grep -q "fertec:" /etc/passwd; then
+    if grep "fertec:" /etc/passwd; then
         echo "ci sono"
         exit
         useradd -m -g users -G wheel ${USER}
