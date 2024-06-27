@@ -7,11 +7,6 @@ setEnvironmentVariables() {
     CONFIGS_DIR=${BASE_DIR}/configs
     LOGS_DIR=${BASE_DIR}/logs
     INSTALL_LOG=${LOGS_DIR}/"$( date "+%Y%m%d-%H%M%S" ).log" 
-
-    PARAM_APP="$1"
-    PARAM_STACK="$2"
-    PARAM_DEVID="$3"
-    PARAM_DEVIP="$4"
     set +a
 
     if [ ! -d $SCRIPTS_DIR ]; then return 2; fi
@@ -21,11 +16,15 @@ setEnvironmentVariables() {
     if [ ! -d $LOGS_DIR ]; then mkdir $LOGS_DIR; fi
     if [ ! -f $INSTALL_LOG ]; then touch -f $INSTALL_LOG; fi
 
-    echo $3
+    echo $PARAM_APP $PARAM_STACK $PARAM_DEVID $PARAM_DEVIP
+    
     return 0
 }
 
-echo $1 
+PARAM_APP="$1"
+PARAM_STACK="$2"
+PARAM_DEVID="$3"
+PARAM_DEVIP="$4"     
     
 # inizializzazione variabili ambiente per procedura di installazione
 setEnvironmentVariables
