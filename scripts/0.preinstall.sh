@@ -45,8 +45,8 @@ doChecks() {
 }
 
 getParameters() {
-    echo $1 $2 $3 $4
-    
+    echo $PARAM_APP $PARAM_STACK $PARAM_DEVID $PARAM_DEVIP
+
     APP="$1"
     STACK="$2"
     DEVID="$3"

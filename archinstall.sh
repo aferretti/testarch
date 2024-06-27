@@ -7,6 +7,11 @@ setEnvironmentVariables() {
     CONFIGS_DIR=${BASE_DIR}/configs
     LOGS_DIR=${BASE_DIR}/logs
     INSTALL_LOG=${LOGS_DIR}/"$( date "+%Y%m%d-%H%M%S" ).log" 
+
+    PARAM_APP="$1"
+    PARAM_STACK="$2"
+    PARAM_DEVID="$3"
+    PARAM_DEVIP="$4"
     set +a
 
     if [ ! -d $SCRIPTS_DIR ]; then return 2; fi
