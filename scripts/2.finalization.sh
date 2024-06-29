@@ -100,5 +100,5 @@ setHostname
 prepareUserScripts
 waitForInput 
 
-#cleanup
-#umountAndReboot
+cleanup
+umountAndReboot

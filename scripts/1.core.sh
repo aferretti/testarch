@@ -126,7 +126,7 @@ setAutologin() {
     checkError "cp ${ASSETS_DIR}/autologin.conf /etc/systemd/system/getty@tty1.service.d"
 
     sed -i "s/!username!/$USERNAME/" /etc/systemd/system/getty@tty1.service.d/autologin.conf
-    checkError "sed -i \"|s[[USER]]|${USERNAME}|g\" /etc/systemd/system/getty@tty1.service.d/autologin.conf"
+    checkError 'sed -i "s/!username!/$USERNAME/" /etc/systemd/system/getty@tty1.service.d/autologin.conf'
 
     systemctl enable getty@tty1.service
     checkError "systemctl enable getty@tty1.service"

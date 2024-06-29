@@ -28,7 +28,7 @@ checkError() {
         fi
 
         saveLog "$errorMessage"
-        if [ -z $2 ]; then exit; fi
+        if [ -z $2 ]; then exit 1; fi
     fi
 }
 
