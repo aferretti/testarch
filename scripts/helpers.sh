@@ -6,7 +6,7 @@ showHeader() {
 }
 
 showInfo() {
-    echo "showInfo - TODO"
+    if [ -n "$1" ]; then echo "$1"; fi
 }
 
 saveLog() {
@@ -24,7 +24,7 @@ checkError() {
         if [ -n "$1" ]; then 
             errorMessage="$1"
         else
-            errorMessage="Unspecified error"
+            errorMessage="Errore non specificato"
         fi
 
         saveLog "$errorMessage"
@@ -33,6 +33,6 @@ checkError() {
 }
 
 waitForInput() {
-    printf "Waiting for you..."
+    printf "Premere un tasto per continuare..."
     read -n 1 -s
 }

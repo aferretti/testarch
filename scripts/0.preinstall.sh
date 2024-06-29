@@ -124,12 +124,24 @@ mountVolumes() {
     checkError "swapon ${DISK}2"
 }
 
+eraseDisk() {
+    sgdisk -Z $DISK 
+    checkError "sgdisk -Z $DISK"
+
+    showInfo "Il sistema verrà riavviato. Ripetere il comando di installazione al prompt"
+    waitForInput
+
+    reboot now
+}
+
 setDisk() {
-    # TODO: verificare se il disco ha già volumi formattati: nel caso cancellare tutto e riavviare la procedura
-    
-    createVolumes
-    formatVolumes
-    mountVolumes
+    if [ $(sgdisk -d ${DISK} 2>&1) = "" ]; then 
+        createVolumes
+        formatVolumes
+        mountVolumes
+    else
+        eraseDisk
+    fi
 }
 
 initPacman() {
