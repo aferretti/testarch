@@ -125,6 +125,8 @@ mountVolumes() {
 }
 
 setDisk() {
+    # TODO: verificare se il disco ha già volumi formattati: nel caso cancellare tutto e riavviare la procedura
+    
     createVolumes
     formatVolumes
     mountVolumes
