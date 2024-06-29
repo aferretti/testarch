@@ -48,12 +48,18 @@ setParameters() {
         checkIp ${PARAM_DEVIP}
         sed -i "s|^DEVIP=.*|DEVIP=${PARAM_DEVIP}|" $CONFIGS_DIR/setup.conf
     fi
+
+    if [ ! -z "$PARAM_DEVGTW" ]; then
+        checkIp ${PARAM_DEVGTW}
+        sed -i "s|^DEVGTW=.*|DEVGTW=${PARAM_DEVGTW}|" $CONFIGS_DIR/setup.conf
+    fi
 }
 
 PARAM_APP="$1"
 PARAM_STACK="$2"
 PARAM_DEVID="$3"
 PARAM_DEVIP="$4"     
+PARAM_DEVGTW="$5"
     
 # inizializzazione variabili ambiente per procedura di installazione
 setEnvironmentVariables

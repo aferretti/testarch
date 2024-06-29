@@ -52,6 +52,7 @@ prepareUserScripts() {
     scriptsPath="/home/${USER}/startup"
     configFile="${scriptsPath}/env.conf"
     useDocker=true
+    bashrcFile="/home/${USER}/.bashrc"
 
     if [ ! -d ${scriptsPath} ]; then 
         mkdir "${scriptsPath}"
@@ -63,8 +64,16 @@ prepareUserScripts() {
         checkError 'touch "${configFile}"'
     fi
 
+    chown ${USER} ${configFile}
+    checkError "chown ${USER} ${configFile}"
+
+    chmod 755 ${configFile}
+    checkError "chmod 755 ${configFile}"
+
     if [ "${STACK,,}" != "docker" ]; then useDocker=false; fi
 
+    echo "IP=${DEVIP}" >> ${configFile}
+    echo "GTW=${DEVGTW}" >> ${configFile}
     echo "PROJECT_NAME=${APP,}" >> ${configFile}    
     echo "WORKSPACE_FOLDER=~/workspace/${APP,,}" >> ${configFile}
     if [ "${APP,,}" = "neuron" ]; then echo "TTY_SYMLINK_ALIAS=ttyEUBOX" >> ${configFile}; fi
@@ -78,7 +87,14 @@ prepareUserScripts() {
     cp ${SCRIPTS_DIR}/3.app.sh ${scriptsPath}/
     checkError 'cp ${SCRIPTS_DIR}/3.app.sh ${scriptsPath}/'
 
-    #TODO: mettere in bash.rc l'esecuzione dello startup
+    chown ${USER} ${scriptsPath}/3.app.sh
+    checkError "chown ${USER} ${scriptsPath}/3.app.sh"
+
+    chmod 755 ${scriptsPath}/3.app.sh
+    checkError "chmod 755 ${scriptsPath}/3.app.sh"
+
+    grep -qxF 'exec openbox-session' ${bashrcFile} || echo 'exec openbox-session' >> ${bashrcFile}
+    checkError "grep -qxF 'exec openbox-session' ${bashrcFile} || echo 'exec openbox-session' >> ${bashrcFile}"
 }
 
 umountAndReboot() {
