@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 
 showHeader() {
-    #echo "showHeader - TODO"
-    if [ -n "$1" ]; then echo "$1"; fi
+    printf "*****************************************************\n"
+    printf "* \n"
+
+    showInfo printf "* %s\n" $1
+    
+    printf "* \n"
+    printf "*****************************************************\n"
 }
 
 showInfo() {
