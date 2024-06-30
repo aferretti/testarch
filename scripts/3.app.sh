@@ -19,6 +19,8 @@ setConnectionName() {
 
 setIpAddress() {
     if [ ! -z $DEVIP ]; then
+        su -p ${PASSWD}
+
         if [ -z $DEVGTW ]; then DEVGTW="192.168.3.1"; fi
 
         echo ${DEVIP} ${DEVGTW}
@@ -35,6 +37,8 @@ setIpAddress() {
             systemctl restart NetworkManager.service
             checkError "systemctl restart NetworkManager.service"
         fi
+
+        exit
     fi
 }
 
