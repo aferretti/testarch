@@ -32,7 +32,7 @@ installOpenbox() {
 setHostname() {
     hostnameFile="/etc/hostname"
 
-    if [ ! -f ${hostnameFile} ]; then 
+    if [ -f ${hostnameFile} ]; then 
         rm -f ${hostnameFile}
         checkError "rm -f ${hostnameFile}"
     fi
@@ -79,7 +79,7 @@ prepareUserScripts() {
     if [ "${APP,,}" = "neuron" ]; then echo "TTY_SYMLINK_ALIAS=ttyEUBOX" >> ${configFile}; fi
     echo "USE_DOCKER=${useDocker}" >> ${configFile}
 
-    if [ ! -f ${scriptsPath}/3.app.sh ]; then
+    if [ -f ${scriptsPath}/3.app.sh ]; then
         rm ${scriptsPath}/3.app.sh
         checkError "rm ${scriptsPath}/3.app.sh"
     fi
