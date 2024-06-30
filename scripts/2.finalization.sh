@@ -11,7 +11,7 @@ source ${SCRIPTS_DIR}/helpers.sh
 
 installOpenbox() {
     homePath="/home/${USERNAME}"
-    xinitrcFile = "${homePath}/.xinitrc"
+    xinitrcFile="${homePath}/.xinitrc"
 
     echo "homePath" ${homePath}
     echo "init" ${xinitrcFile}
