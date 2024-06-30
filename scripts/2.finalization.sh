@@ -10,7 +10,7 @@ source ${CONFIGS_DIR}/setup.conf
 source ${SCRIPTS_DIR}/helpers.sh
 
 installOpenbox() {
-    homePath="/home/${USER}"
+    homePath="/home/${USERNAME}"
     xinitrcFile = "${homePath}/.xinitrc"
 
     echo "homePath" ${homePath}
@@ -52,10 +52,10 @@ cleanup() {
 }
 
 prepareUserScripts() {
-    scriptsPath="/home/${USER}/startup"
+    scriptsPath="/home/${USERNAME}/startup"
     configFile="${scriptsPath}/env.conf"
     useDocker=true
-    bashrcFile="/home/${USER}/.bashrc"
+    bashrcFile="/home/${USERNAME}/.bashrc"
 
     if [ ! -d ${scriptsPath} ]; then 
         mkdir "${scriptsPath}"
@@ -67,8 +67,8 @@ prepareUserScripts() {
         checkError 'touch "${configFile}"'
     fi
 
-    chown ${USER} ${configFile}
-    checkError "chown ${USER} ${configFile}"
+    chown ${USERNAME} ${configFile}
+    checkError "chown ${USERNAME} ${configFile}"
 
     chmod 755 ${configFile}
     checkError "chmod 755 ${configFile}"
@@ -90,8 +90,8 @@ prepareUserScripts() {
     cp ${SCRIPTS_DIR}/3.app.sh ${scriptsPath}/
     checkError 'cp ${SCRIPTS_DIR}/3.app.sh ${scriptsPath}/'
 
-    chown ${USER} ${scriptsPath}/3.app.sh
-    checkError "chown ${USER} ${scriptsPath}/3.app.sh"
+    chown ${USERNAME} ${scriptsPath}/3.app.sh
+    checkError "chown ${USERNAME} ${scriptsPath}/3.app.sh"
 
     chmod 755 ${scriptsPath}/3.app.sh
     checkError "chmod 755 ${scriptsPath}/3.app.sh"
