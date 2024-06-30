@@ -70,7 +70,7 @@ if [ $? -eq 0 ]; then
 
     # preparazione dei parametri di lavoro
     setParameters
-
+: '
     # esecuzione dello script di pre-installazione
     ( bash ${SCRIPTS_DIR}/0.preinstall.sh )
 
@@ -83,6 +83,8 @@ if [ $? -eq 0 ]; then
             ( arch-chroot /mnt ${HOME}/archinstall/scripts/2.finalization.sh )
         fi
     fi
+'
+    ( arch-chroot /mnt ${HOME}/archinstall/scripts/2.finalization.sh )
 else
     printf "HELP %d" $?
 fi
