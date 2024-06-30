@@ -98,16 +98,11 @@ prepareUserScripts() {
     checkError "grep -qxF 'source ${scriptsPath}/3.app.sh' ${bashrcFile} || echo 'source ${scriptsPath}/3.app.sh' >> ${bashrcFile}"
 }
 
-getActiveConnectionName() {
-    devName="enp1s0"
-    sourceEthName=""
-    
-}
-
 setConnectionName() {
     ethName="LAN"
 
-    getActiveConnectionName
+    sourceEthName=$(nmcli -g name connection show | head -1)
+    checkError "sourceEthName=$(nmcli -g name connection show | head -1)"
 
     if [ ! -z "${sourceEthName}" ]; then
         nmcli connection modify "${sourceEthName}" con-name "${ethName}"
@@ -146,7 +141,11 @@ installOpenbox
 setHostname
 
 prepareUserScripts
+
+waitForInput
 setIpAddress
+nmcli 
+waitForInput
 
 cleanup
 exit

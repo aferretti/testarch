@@ -10,7 +10,7 @@ cleanupAndReboot() {
     # rimozione della cartella contenente gli script di avvio
     rm -r ${HOME}/startup
 
-    sudo reboot
+    #sudo reboot
 }
 
 #####################################
