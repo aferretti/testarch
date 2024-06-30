@@ -75,8 +75,6 @@ prepareUserScripts() {
 
     if [ "${STACK,,}" != "docker" ]; then useDocker=false; fi
 
-    echo "IP=${DEVIP}" >> ${configFile}
-    echo "GTW=${DEVGTW}" >> ${configFile}
     echo "PROJECT_NAME=${APP,}" >> ${configFile}    
     echo "WORKSPACE_FOLDER=~/workspace/${APP,,}" >> ${configFile}
     if [ "${APP,,}" = "neuron" ]; then echo "TTY_SYMLINK_ALIAS=ttyEUBOX" >> ${configFile}; fi
@@ -100,6 +98,46 @@ prepareUserScripts() {
     checkError "grep -qxF 'source ${scriptsPath}/3.app.sh' ${bashrcFile} || echo 'source ${scriptsPath}/3.app.sh' >> ${bashrcFile}"
 }
 
+getActiveConnectionName() {
+    devName="enp1s0"
+    sourceEthName=""
+    
+}
+
+setConnectionName() {
+    ethName="LAN"
+
+    getActiveConnectionName
+
+    if [ ! -z "${sourceEthName}" ]; then
+        nmcli connection modify "${sourceEthName}" con-name "${ethName}"
+        checkError "nmcli connection modify \"${sourceEthName}\" con-name \"${ethName}\""
+    else 
+        return 1
+    fi
+}
+
+setIpAddress() {
+    if [ ! -z $DEVIP ]; then
+        if [ -z $DEVGTW ]; then DEVGTW="192.168.3.1"; fi
+
+        echo ${DEVIP} ${DEVGTW}
+        printf "Waiting for you..."
+        read -n 1 -s
+
+        setConnectionName
+        checkError "setConnectionName"
+
+        if [ ! -z ${ethName} ]; then
+            nmcli con mod ${ethName} ipv4.addresses ${DEVIP}/24 ipv4.gateway ${DEVGTW}/24 ipv4.dns 8.8.8.8 ipv4.method manual
+            checkError "nmcli con mod ${ethName} ipv4.addresses ${DEVIP}/24 ipv4.gateway ${DEVGTW}/24 ipv4.dns 8.8.8.8 ipv4.method manual"
+
+            systemctl restart NetworkManager.service
+            checkError "systemctl restart NetworkManager.service"
+        fi
+    fi
+}
+
 # 
 clear
 showHeader "Setup finalization"
@@ -108,6 +146,7 @@ installOpenbox
 setHostname
 
 prepareUserScripts
+setIpAddress
 
 cleanup
 exit
