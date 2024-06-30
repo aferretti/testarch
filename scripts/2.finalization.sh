@@ -44,8 +44,8 @@ setHostname() {
 }
 
 cleanup() {
-    rm -r "${HOME}/ArchInstall"
-    checkError 'rm -r "${HOME}/ArchInstall"'
+    rm -r "${HOME}/archinstall"
+    checkError 'rm -r "${HOME}/archinstall"'
 }
 
 prepareUserScripts() {
@@ -93,8 +93,8 @@ prepareUserScripts() {
     chmod 755 ${scriptsPath}/3.app.sh
     checkError "chmod 755 ${scriptsPath}/3.app.sh"
 
-    grep -qxF 'exec openbox-session' ${bashrcFile} || echo 'exec openbox-session' >> ${bashrcFile}
-    checkError "grep -qxF 'exec openbox-session' ${bashrcFile} || echo 'exec openbox-session' >> ${bashrcFile}"
+    grep -qxF 'source ${scriptsPath}/3.app.sh' ${bashrcFile} || echo 'source ${scriptsPath}/3.app.sh' >> ${bashrcFile}
+    checkError "grep -qxF 'source ${scriptsPath}/3.app.sh' ${bashrcFile} || echo 'source ${scriptsPath}/3.app.sh' >> ${bashrcFile}"
 }
 
 umountAndReboot() {
