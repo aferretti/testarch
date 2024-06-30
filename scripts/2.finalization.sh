@@ -76,6 +76,8 @@ prepareUserScripts() {
     if [ "${STACK,,}" != "docker" ]; then useDocker=false; fi
 
     echo "PASSWORD=${PASSWD,}" >> ${configFile}
+    echo "IP=${DEVIP}" >> ${configFile}
+    echo "GTW=${DEVGTW}" >> ${configFile}
     echo "PROJECT_NAME=${APP,}" >> ${configFile}
     echo "WORKSPACE_FOLDER=~/workspace/${APP,,}" >> ${configFile}
     if [ "${APP,,}" = "neuron" ]; then echo "TTY_SYMLINK_ALIAS=ttyEUBOX" >> ${configFile}; fi
