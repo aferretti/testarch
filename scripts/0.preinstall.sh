@@ -135,7 +135,7 @@ eraseDisk() {
 }
 
 setDisk() {
-    if [ $(sgdisk -d ${DISK} 2>&1) = "" ]; then 
+    if [[ $(sgdisk -d ${DISK} 2>&1) == "" ]]; then 
         createVolumes
         formatVolumes
         mountVolumes
