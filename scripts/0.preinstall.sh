@@ -206,5 +206,3 @@ showHeader "FSTable initialization and resources cloning"
 
 initFSTable
 clone
-
-waitForInput

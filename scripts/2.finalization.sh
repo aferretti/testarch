@@ -57,6 +57,9 @@ prepareUserScripts() {
     if [ ! -d ${scriptsPath} ]; then 
         mkdir "${scriptsPath}"
         checkError 'mkdir "${scriptsPath}"'
+
+        chown ${USERNAME} ${scriptsPath}
+        checkError "chown ${USERNAME} ${scriptsPath}"
     fi
 
     if [ ! -f ${configFile} ]; then 
@@ -105,7 +108,6 @@ installOpenbox
 setHostname
 
 prepareUserScripts
-waitForInput 
 
 cleanup
 exit

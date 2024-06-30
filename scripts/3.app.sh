@@ -26,6 +26,8 @@ setIpAddress() {
 }
 
 cleanupAndReboot() {
+    # rimozione della riga che esegue lo startup dal file .bashrc
+    
     rm -r ${HOME}/startup
     reboot now
 }

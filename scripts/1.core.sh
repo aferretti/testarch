@@ -153,5 +153,3 @@ showHeader "Default editor and autologin setup"
 
 setDefaultEditor
 setAutologin
-
-waitForInput
