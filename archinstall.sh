@@ -77,7 +77,7 @@ if [ $? -eq 0 ]; then
 
     # preparazione dei parametri di lavoro
     setParameters
-: '
+
     # esecuzione dello script di pre-installazione
     ( bash ${SCRIPTS_DIR}/0.preinstall.sh )
 
@@ -88,11 +88,12 @@ if [ $? -eq 0 ]; then
         if [ $? -eq 0 ]; then
             # esecuzione dello script di post-installazione
             ( arch-chroot /mnt ${HOME}/archinstall/scripts/2.finalization.sh )
+
+            if [ $? -eq 0 ]; then umountAndReboot; fi
         fi
     fi
-'
-    ( arch-chroot /mnt ${HOME}/archinstall/scripts/2.finalization.sh )
-    #umountAndReboot
+
+    #( arch-chroot /mnt ${HOME}/archinstall/scripts/2.finalization.sh )    
 else
     printf "HELP %d" $?
 fi
