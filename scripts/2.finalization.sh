@@ -13,8 +13,9 @@ installOpenbox() {
     homePath="/home/${USER}"
     xinitrcFile = "${homePath}/.xinitrc"
 
-    echo "init " "${xinitrcFile}"
-    
+    echo "homePath" ${homePath}
+    echo "init" ${xinitrcFile}
+
     pacman -S openbox xorg-server xorg-xinit xorg-fonts-misc xterm --noconfirm --needed
     checkError "pacman -S openbox xorg-server xorg-xinit xorg-fonts-misc xterm --noconfirm --needed"
 
