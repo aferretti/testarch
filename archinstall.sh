@@ -55,6 +55,13 @@ setParameters() {
     fi
 }
 
+umountAndReboot() {
+    umount /mnt/boot
+    umount /mnt
+
+    reboot now
+}
+
 PARAM_APP="$1"
 PARAM_STACK="$2"
 PARAM_DEVID="$3"
@@ -85,6 +92,7 @@ if [ $? -eq 0 ]; then
     fi
 '
     ( arch-chroot /mnt ${HOME}/archinstall/scripts/2.finalization.sh )
+    #umountAndReboot
 else
     printf "HELP %d" $?
 fi

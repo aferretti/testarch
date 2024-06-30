@@ -93,17 +93,8 @@ prepareUserScripts() {
     chmod 755 ${scriptsPath}/3.app.sh
     checkError "chmod 755 ${scriptsPath}/3.app.sh"
 
-    grep -qxF 'source ${scriptsPath}/3.app.sh' ${bashrcFile} || echo 'source ${scriptsPath}/3.app.sh' >> ${bashrcFile}
+    grep -qxF "source ${scriptsPath}/3.app.sh" ${bashrcFile} || echo "source ${scriptsPath}/3.app.sh" >> ${bashrcFile}
     checkError "grep -qxF 'source ${scriptsPath}/3.app.sh' ${bashrcFile} || echo 'source ${scriptsPath}/3.app.sh' >> ${bashrcFile}"
-}
-
-umountAndReboot() {
-    exit
-
-    umount /mnt/boot
-    umount /mnt
-
-    reboot now
 }
 
 # 
@@ -117,4 +108,4 @@ prepareUserScripts
 waitForInput 
 
 cleanup
-umountAndReboot
+exit
