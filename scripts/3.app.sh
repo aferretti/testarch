@@ -4,12 +4,12 @@
 source ${HOME}/startup/env.conf
 
 getEthName() {
-    ethName="enps00"
+    ethName="enp1s0"
 }
 setIpAddress() {
     if [ ! -z $IP ]; then
         if [ -z $GTW ]; then GTW="192.168.3.1"; fi
-        
+
         echo ${IP} ${GTW}
         printf "Waiting for you..."
         read -n 1 -s
