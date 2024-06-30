@@ -13,9 +13,6 @@ installOpenbox() {
     homePath="/home/${USERNAME}"
     xinitrcFile="${homePath}/.xinitrc"
 
-    echo "homePath" ${homePath}
-    echo "init" ${xinitrcFile}
-
     pacman -S openbox xorg-server xorg-xinit xorg-fonts-misc xterm --noconfirm --needed
     checkError "pacman -S openbox xorg-server xorg-xinit xorg-fonts-misc xterm --noconfirm --needed"
 
@@ -82,7 +79,7 @@ prepareUserScripts() {
     if [ "${APP,,}" = "neuron" ]; then echo "TTY_SYMLINK_ALIAS=ttyEUBOX" >> ${configFile}; fi
     echo "USE_DOCKER=${useDocker}" >> ${configFile}
 
-    if [ ! -f ${scriptsPath}/3.app.sh ]; then
+    if [[ ! -f ${scriptsPath}/3.app.sh ]]; then
         rm ${scriptsPath}/3.app.sh
         checkError "rm ${scriptsPath}/3.app.sh"
     fi
