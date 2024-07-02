@@ -24,10 +24,18 @@ setIpAddress() {
     if [ ! -z $IP ]; then
         if [ -z $GTW ]; then GTW="192.168.3.1"; fi
 
+        echo "setConnectionName"
+        waitForInput
+
         setConnectionName
 
         if [ ! -z ${ethName} ]; then
+            echo "nmcli ip"
+            waitForInput
             sudo nmcli con mod ${ethName} ipv4.addresses ${IP}/24 ipv4.gateway ${GTW} ipv4.dns 8.8.8.8 ipv4.method manual
+
+            echo "systemctl restart"
+            waitForInput
             sudo systemctl restart NetworkManager.service
         fi
         exit
@@ -52,4 +60,4 @@ setIpAddress
 #####################################
 
 # Pulizia e riavvio
-cleanupAndReboot
+#cleanupAndReboot
