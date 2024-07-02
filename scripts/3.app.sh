@@ -23,19 +23,14 @@ setIpAddress() {
 
         if [ -z $GTW ]; then GTW="192.168.3.1"; fi
 
-        echo ${IP} ${GTW}
-        printf "Waiting for you..."
-        read -n 1 -s
-
         setConnectionName
-        checkError "setConnectionName"
 
         if [ ! -z ${ethName} ]; then
-            nmcli con mod ${ethName} ipv4.addresses ${IP}/24 ipv4.gateway ${GTW}/24 ipv4.dns 8.8.8.8 ipv4.method manual
-            checkError "nmcli con mod ${ethName} ipv4.addresses ${DEVIP}/24 ipv4.gateway ${DEVGTW}/24 ipv4.dns 8.8.8.8 ipv4.method manual"
+            echo ${ethName}
 
+            nmcli con mod ${ethName} ipv4.addresses ${IP}/24 ipv4.gateway ${GTW} ipv4.dns 8.8.8.8 ipv4.method manual
+            echo "riavvio networkmanager"
             systemctl restart NetworkManager.service
-            checkError "systemctl restart NetworkManager.service"
         fi
 
         exit
