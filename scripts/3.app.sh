@@ -3,11 +3,16 @@
 # Caricamento file env.conf
 source ${HOME}/startup/env.conf
 
+waitForInput() {
+    printf "Premere un tasto per continuare..."
+    read -n 1 -s
+}
+
 setConnectionName() {
     ethName="LAN"
 
     sourceEthName=$(nmcli -g name connection show | head -1)
-    checkError "sourceEthName=$(nmcli -g name connection show | head -1)"
+    echo "Name" ${sourceEthName}
 
     if [ ! -z "${sourceEthName}" ]; then
         nmcli connection modify "${sourceEthName}" con-name "${ethName}"
@@ -27,8 +32,11 @@ setIpAddress() {
 
         if [ ! -z ${ethName} ]; then
             echo ${ethName}
+            waitForInput
 
-            nmcli con mod ${ethName} ipv4.addresses ${IP}/24 ipv4.gateway ${GTW} ipv4.dns 8.8.8.8 ipv4.method manual
+            echo ${PASSWD} | sudo -S nmcli con mod ${ethName} ipv4.addresses ${IP}/24 ipv4.gateway ${GTW} ipv4.dns 8.8.8.8 ipv4.method manual
+            waitForInput
+            
             echo "riavvio networkmanager"
             systemctl restart NetworkManager.service
         fi
