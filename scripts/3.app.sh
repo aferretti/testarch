@@ -15,8 +15,8 @@ setConnectionName() {
     echo "Name" ${sourceEthName}
 
     if [ ! -z "${sourceEthName}" ]; then
-        nmcli connection modify "${sourceEthName}" con-name "${ethName}"
-        checkError "nmcli connection modify \"${sourceEthName}\" con-name \"${ethName}\""
+        waitForInput
+        echo ${PASSWD} | sudo -S nmcli connection modify "${sourceEthName}" con-name "${ethName}"
     else 
         return 1
     fi
@@ -30,17 +30,18 @@ setIpAddress() {
 
         setConnectionName
 
+: '
         if [ ! -z ${ethName} ]; then
             echo ${ethName}
             waitForInput
 
             echo ${PASSWD} | sudo -S nmcli con mod ${ethName} ipv4.addresses ${IP}/24 ipv4.gateway ${GTW} ipv4.dns 8.8.8.8 ipv4.method manual
             waitForInput
-            
+
             echo "riavvio networkmanager"
             systemctl restart NetworkManager.service
         fi
-
+'
         exit
     fi
 }
