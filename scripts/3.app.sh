@@ -19,7 +19,7 @@ setConnectionName() {
 
 setIpAddress() {
     if [ ! -z $IP ]; then
-        su -p ${PASSWD}
+        #su -p ${PASSWD}
 
         if [ -z $GTW ]; then GTW="192.168.3.1"; fi
 
