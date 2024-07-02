@@ -15,7 +15,6 @@ setConnectionName() {
 
     if [ ! -z "${sourceEthName}" ]; then
         sudo nmcli connection modify "${sourceEthName}" con-name "${ethName}"
-        #echo ${PASSWD} | sudo -S nmcli connection modify "${sourceEthName}" con-name "${ethName}"
     else 
         return 1
     fi
@@ -23,21 +22,12 @@ setConnectionName() {
 
 setIpAddress() {
     if [ ! -z $IP ]; then
-        #su -p ${PASSWD}
-
         if [ -z $GTW ]; then GTW="192.168.3.1"; fi
 
         setConnectionName
 
         if [ ! -z ${ethName} ]; then
-            echo ${ethName}
-            waitForInput
-
             sudo nmcli con mod ${ethName} ipv4.addresses ${IP}/24 ipv4.gateway ${GTW} ipv4.dns 8.8.8.8 ipv4.method manual
-            #echo ${PASSWD} | sudo -S nmcli con mod ${ethName} ipv4.addresses ${IP}/24 ipv4.gateway ${GTW} ipv4.dns 8.8.8.8 ipv4.method manual
-            waitForInput
-
-            echo "riavvio networkmanager"
             sudo systemctl restart NetworkManager.service
         fi
         exit
@@ -49,9 +39,9 @@ cleanupAndReboot() {
     sed -i '/source /home/fertec/startup/3\.app\.sh/d' ${HOME}/.bashrc
 
     # rimozione della cartella contenente gli script di avvio
-    #rm -r ${HOME}/startup
+    rm -r ${HOME}/startup
 
-    #sudo reboot
+    sudo reboot
 }
 
 # Impostazione indirizzo IP statico
