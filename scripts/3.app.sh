@@ -12,10 +12,8 @@ setConnectionName() {
     ethName="LAN"
 
     sourceEthName=$(nmcli -g name connection show | head -1)
-    echo "Name" ${sourceEthName}
 
     if [ ! -z "${sourceEthName}" ]; then
-        waitForInput
         sudo nmcli connection modify "${sourceEthName}" con-name "${ethName}"
         #echo ${PASSWD} | sudo -S nmcli connection modify "${sourceEthName}" con-name "${ethName}"
     else 
@@ -31,18 +29,17 @@ setIpAddress() {
 
         setConnectionName
 
-: '
         if [ ! -z ${ethName} ]; then
             echo ${ethName}
             waitForInput
 
-            echo ${PASSWD} | sudo -S nmcli con mod ${ethName} ipv4.addresses ${IP}/24 ipv4.gateway ${GTW} ipv4.dns 8.8.8.8 ipv4.method manual
+            sudo nmcli con mod ${ethName} ipv4.addresses ${IP}/24 ipv4.gateway ${GTW} ipv4.dns 8.8.8.8 ipv4.method manual
+            #echo ${PASSWD} | sudo -S nmcli con mod ${ethName} ipv4.addresses ${IP}/24 ipv4.gateway ${GTW} ipv4.dns 8.8.8.8 ipv4.method manual
             waitForInput
 
             echo "riavvio networkmanager"
-            systemctl restart NetworkManager.service
+            sudo systemctl restart NetworkManager.service
         fi
-'
         exit
     fi
 }
@@ -52,7 +49,7 @@ cleanupAndReboot() {
     sed -i '/source /home/fertec/startup/3\.app\.sh/d' ${HOME}/.bashrc
 
     # rimozione della cartella contenente gli script di avvio
-    rm -r ${HOME}/startup
+    #rm -r ${HOME}/startup
 
     #sudo reboot
 }
@@ -65,4 +62,4 @@ setIpAddress
 #####################################
 
 # Pulizia e riavvio
-#cleanupAndReboot
+cleanupAndReboot
