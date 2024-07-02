@@ -16,7 +16,8 @@ setConnectionName() {
 
     if [ ! -z "${sourceEthName}" ]; then
         waitForInput
-        echo ${PASSWD} | sudo -S nmcli connection modify "${sourceEthName}" con-name "${ethName}"
+        sudo nmcli connection modify "${sourceEthName}" con-name "${ethName}"
+        #echo ${PASSWD} | sudo -S nmcli connection modify "${sourceEthName}" con-name "${ethName}"
     else 
         return 1
     fi
