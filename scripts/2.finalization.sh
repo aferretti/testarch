@@ -54,20 +54,11 @@ setIpAddress() {
         sed -i "s|^Name=.*|Name=${ethName}|" ${ethFile}
         checkError 'sed -i "s|^Name=.*|Name=${ethName}|" ${ethFile}'
 
-        sed -i "s|^Address=.*|Address=${IP}/24|" ${ethFile}
-        checkError 'sed -i "s|^Address=.*|Address=${IP}/24|" ${ethFile}'
+        sed -i "s|^Address=.*|Address=${DEVIP}|/24" ${ethFile}
+        checkError 'sed -i "s|^Address=.*|Address=${DEVIP}|/24" ${ethFile}'
 
-        sed -i "s|^Gateway=.*|Gateway=${GTW}|" ${ethFile}
-        checkError 'sed -i "s|^Gateway=.*|Gateway=${GTW}|" ${ethFile}'
-
-        systemctl stop dhcpcd dhcpd
-        checkError 'systemctl stop dhcpcd dhcpd'
-
-        systemctl disable dhcpcd dhcpd
-        checkError 'systemctl disable dhcpcd dhcpd'
-
-        systemctl restart systemd-networkd
-        checkError 'systemctl restart systemd-networkd'
+        sed -i "s|^Gateway=.*|Gateway=${DEVGTW}|" ${ethFile}
+        checkError 'sed -i "s|^Gateway=.*|Gateway=${DEVGTW}|" ${ethFile}'
     fi
 }
 
