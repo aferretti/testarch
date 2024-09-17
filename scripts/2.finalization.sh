@@ -43,9 +43,32 @@ setHostname() {
     echo ${DEVID} >> ${hostnameFile}
 }
 
-cleanup() {
-    rm -r "${HOME}/archinstall"
-    checkError 'rm -r "${HOME}/archinstall"'
+setIpAddress() {
+    if [ "${APP,,}" = "neuron" ]; then
+        ethName='enp1s0'
+        ethFile='/etc/systemd/network/${ethName}.network'
+
+        cp "${CONFIGS_DIR}/${ethName}.network" "/etc/systemd/network"
+        checkError 'cp "${CONFIGS_DIR}/${ethName}.network" "/etc/systemd/network"'
+        
+        sed -i "s|^Name=.*|Name=${ethName}|" ${ethFile}
+        checkError 'sed -i "s|^Name=.*|Name=${ethName}|" ${ethFile}'
+
+        sed -i "s|^Address=.*|Address=${IP}/24|" ${ethFile}
+        checkError 'sed -i "s|^Address=.*|Address=${IP}/24|" ${ethFile}'
+
+        sed -i "s|^Gateway=.*|Gateway=${GTW}|" ${ethFile}
+        checkError 'sed -i "s|^Gateway=.*|Gateway=${GTW}|" ${ethFile}'
+
+        systemctl stop dhcpcd dhcpd
+        checkError 'systemctl stop dhcpcd dhcpd'
+
+        systemctl disable dhcpcd dhcpd
+        checkError 'systemctl disable dhcpcd dhcpd'
+
+        systemctl restart systemd-networkd
+        checkError 'systemctl restart systemd-networkd'
+    fi
 }
 
 prepareUserScripts() {
@@ -101,6 +124,11 @@ prepareUserScripts() {
     checkError "grep -qxF 'source ${scriptsPath}/3.app.sh' ${bashrcFile} || echo 'source ${scriptsPath}/3.app.sh' >> ${bashrcFile}"
 }
 
+cleanup() {
+    rm -r "${HOME}/archinstall"
+    checkError 'rm -r "${HOME}/archinstall"'
+}
+
 # 
 clear
 showHeader "Setup finalization"
@@ -108,6 +136,7 @@ showHeader "Setup finalization"
 installOpenbox
 setHostname
 
+setIpAddress
 prepareUserScripts
 
 cleanup

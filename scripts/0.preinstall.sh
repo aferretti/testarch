@@ -46,6 +46,7 @@ doChecks() {
 
 getFirstDiskAvailable() {
     DISK=""
+    PARTSEP=""
 
     for dev in $(lsblk -ndo name); do
         devinfo="$(udevadm info --query=property --path=/sys/block/$dev)"
@@ -56,6 +57,7 @@ getFirstDiskAvailable() {
 
         if [ "${devtype,,}" = "disk" ] && { [ "${devbus,,}" = "ata" ] || [ "${devbus,,}" = "scsi" ]; }; then
             DISK="$devname"
+            if [ "${APP,,}" = "fenice" ]; then PARTSEP="p"; fi
             return
         fi
     done
@@ -103,25 +105,25 @@ createVolumes() {
 }
 
 formatVolumes() {
-    mkfs.fat -F 32 ${DISK}1
-    checkError "mkfs.fat -F 32 ${DISK}1"
+    mkfs.fat -F 32 ${DISK}${PARTSEP}1
+    checkError "mkfs.fat -F 32 ${DISK}${PARTSEP}1"
 
-    mkswap ${DISK}2
-    checkError "mkswap ${DISK}2"
+    mkswap ${DISK}${PARTSEP}2
+    checkError "mkswap ${DISK}${PARTSEP}2"
 
-    mkfs.ext4 -qF ${DISK}3
-    checkError "mkfs.ext4 -qF ${DISK}3"
+    mkfs.ext4 -qF ${DISK}${PARTSEP}3
+    checkError "mkfs.ext4 -qF ${DISK}${PARTSEP}3"
 }
 
 mountVolumes() {
-    mount ${DISK}3 /mnt
-    checkError "mount ${DISK}3 /mnt"
+    mount ${DISK}${PARTSEP}3 /mnt
+    checkError "mount ${DISK}${PARTSEP}3 /mnt"
 
-    mount --mkdir ${DISK}1 /mnt/boot
-    checkError "mount --mkdir ${DISK}1 /mnt/boot"
+    mount --mkdir ${DISK}${PARTSEP}1 /mnt/boot
+    checkError "mount --mkdir ${DISK}${PARTSEP}1 /mnt/boot"
 
-    swapon ${DISK}2
-    checkError "swapon ${DISK}2"
+    swapon ${DISK}${PARTSEP}2
+    checkError "swapon ${DISK}${PARTSEP}2"
 }
 
 eraseDisk() {
