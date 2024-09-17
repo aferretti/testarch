@@ -45,8 +45,8 @@ setHostname() {
 
 setIpAddress() {
     if [ "${APP,,}" = "neuron" ]; then
-        ethName='enp1s0'
-        ethFile='/etc/systemd/network/${ethName}.network'
+        ethName="enp1s0"
+        ethFile="/etc/systemd/network/${ethName}.network"
 
         cp "${CONFIGS_DIR}/${ethName}.network" "/etc/systemd/network"
         checkError 'cp "${CONFIGS_DIR}/${ethName}.network" "/etc/systemd/network"'
