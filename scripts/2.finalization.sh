@@ -54,8 +54,8 @@ setIpAddress() {
         sed -i "s|^Name=.*|Name=${ethName}|" ${ethFile}
         checkError 'sed -i "s|^Name=.*|Name=${ethName}|" ${ethFile}'
 
-        sed -i "s|^Address=.*|Address=${DEVIP}|/24" ${ethFile}
-        checkError 'sed -i "s|^Address=.*|Address=${DEVIP}|/24" ${ethFile}'
+        sed -i "s|^Address=.*|Address=${DEVIP}/24|" ${ethFile}
+        checkError 'sed -i "s|^Address=.*|Address=${DEVIP}/24|" ${ethFile}'
 
         sed -i "s|^Gateway=.*|Gateway=${DEVGTW}|" ${ethFile}
         checkError 'sed -i "s|^Gateway=.*|Gateway=${DEVGTW}|" ${ethFile}'
