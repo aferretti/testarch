@@ -20,7 +20,7 @@ saveLogAndExit() {
 
 getEthName() {
     ETHNAME="eu-lan"    
-    echo ${PASSWORD} | sudo -S nmcli connection modify Wired\ connection\ 1 con-name ${ETHNAME}
+    echo ${PASSWORD} | sudo -S nmcli connection modify Wired\ connection\ 1 con-name ${ETHNAME} >/dev/null
 }
 
 setIpAddress() {
@@ -28,9 +28,10 @@ setIpAddress() {
         getEthName
         if [ -z ${ETHNAME} ]; then saveLogAndExit "ERROR! No active ethernet interface found"; fi
 
-        echo ${PASSWORD} | sudo -S nmcli connection modify ${ETHNAME} ipv4.addresses ${IP}/24
-        echo ${PASSWORD} | sudo -S nmcli connection modify ${ETHNAME} ipv4.gateway ${GTW}
-        echo ${PASSWORD} | sudo -S nmcli connection up ${ETHNAME}
+        echo ${PASSWORD} | sudo -S nmcli con mod ${ETHNAME} ipv4.addresses "" ipv4.gateway "" >/dev/null
+        echo ${PASSWORD} | sudo -S nmcli connection modify ${ETHNAME} ipv4.addresses ${IP}/24 >/dev/null
+        echo ${PASSWORD} | sudo -S nmcli connection modify ${ETHNAME} ipv4.gateway ${GTW} >/dev/null
+        echo ${PASSWORD} | sudo -S nmcli connection up ${ETHNAME} >/dev/null
     fi
 }
 
@@ -42,15 +43,15 @@ cleanupAndReboot() {
     if [ -d ${HOME}/startup ]; then rm -r ${HOME}/startup; fi
 
     # riavvio
-    echo ${PASSWORD} | sudo -S reboot
+    echo ${PASSWORD} | sudo -S reboot >/dev/null
 }
-
-setIpAddress
 
 #####################################
 # avenneri: qui...
 #####################################
 
+# Impostazione indirizzo IP statico
+setIpAddress
+
 # Pulizia e riavvio
-waitForInput
 cleanupAndReboot
