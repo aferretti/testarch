@@ -32,6 +32,8 @@ cleanupAndReboot() {
     #sudo reboot
 }
 
+setIpAddress
+
 #####################################
 # avenneri: qui...
 #####################################
