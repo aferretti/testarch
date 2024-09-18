@@ -16,6 +16,12 @@ getEthName() {
     done
 }
 
+setIpAddress() {
+    if [ "${APP,,}" = "neuron" ]; then
+        getEthName
+    fi
+}
+
 cleanupAndReboot() {
     # rimozione della riga che esegue lo startup dal file .bashrc
     sed -i '/source /home/fertec/startup/3\.app\.sh/d' ${HOME}/.bashrc
