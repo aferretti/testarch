@@ -26,7 +26,7 @@ setIpAddress() {
             exit
         fi
 
-        echo f3rt3c | sudo -S nmcli connection modify ${ETHNAME} con-name culo
+        echo f3rt3c | sudo -S nmcli connection modify '${ETHNAME}' con-name culo
     fi
 }
 
