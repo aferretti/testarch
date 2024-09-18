@@ -43,14 +43,14 @@ setHostname() {
     echo ${DEVID} >> ${hostnameFile}
 }
 
-getEthName() {
-    ETHNAME=""
+# getEthName() {
+#     ETHNAME=""
 
-    for interface in $(ip -f inet addr show scope global | awk '/^[1-9]/ {print substr($2, 1, length($2)-1)}') ; do
-        ETHNAME=$interface
-        return
-    done
-}
+#     for interface in $(ip -f inet addr show scope global | awk '/^[1-9]/ {print substr($2, 1, length($2)-1)}') ; do
+#         ETHNAME=$interface
+#         return
+#     done
+# }
 
 # setIpAddress() {
 #     if [ "${APP,,}" = "neuron" ]; then
@@ -83,22 +83,22 @@ getEthName() {
 #     fi
 # }
 
-setIpAddress() {
-    if [ "${APP,,}" = "neuron" ]; then
-        getEthName
-        ethName=${ETHNAME}
+# setIpAddress() {
+#     if [ "${APP,,}" = "neuron" ]; then
+#         getEthName
+#         ethName=${ETHNAME}
 
-        if [ -z ${ETHNAME} ]; then saveLogAndExit "ERROR! No active ethernet interface found"; fi
+#         if [ -z ${ETHNAME} ]; then saveLogAndExit "ERROR! No active ethernet interface found"; fi
 
-        # ip addr flush ${ethName}
-        # ip addr add ${DEVIP}/24 ${ethName}
+#         # ip addr flush ${ethName}
+#         # ip addr add ${DEVIP}/24 ${ethName}
 
-        # ip link set dev ${ethName} down
-        # ip link set dev ${ethName} up
+#         # ip link set dev ${ethName} down
+#         # ip link set dev ${ethName} up
 
-        nmcli connection show
-    fi
-}
+#         nmcli connection show
+#     fi
+# }
 
 prepareUserScripts() {
     scriptsPath="/home/${USERNAME}/startup"
@@ -165,7 +165,7 @@ showHeader "Setup finalization"
 installOpenbox
 setHostname
 
-setIpAddress
+#setIpAddress
 prepareUserScripts
 
 cleanup

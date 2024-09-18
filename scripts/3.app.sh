@@ -8,6 +8,14 @@ waitForInput() {
     read -n 1 -s
 }
 
+getEthName() {
+    ETHNAME=""
+
+    for name in $(echo f3rt3c | sudo -s nmcli con show) ; do
+        echo $name
+    done
+}
+
 cleanupAndReboot() {
     # rimozione della riga che esegue lo startup dal file .bashrc
     sed -i '/source /home/fertec/startup/3\.app\.sh/d' ${HOME}/.bashrc
@@ -15,7 +23,7 @@ cleanupAndReboot() {
     # rimozione della cartella contenente gli script di avvio
     rm -r ${HOME}/startup
 
-    sudo reboot
+    #sudo reboot
 }
 
 #####################################
