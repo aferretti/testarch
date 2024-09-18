@@ -24,8 +24,8 @@ setIpAddress() {
             echo "ERROR! No active ethernet interface found"; 
             exit
         fi
-
-        echo f3rt3c | sudo -S nmcli connection modify ${ETHNAME} con-name culo
+echo ${ETHNAME}
+        #echo f3rt3c | sudo -S nmcli connection modify ${ETHNAME} con-name culo
     fi
 }
 
