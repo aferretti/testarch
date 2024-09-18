@@ -9,7 +9,7 @@ waitForInput() {
 }
 
 getEthName() {
-    ETHNAME="Wired connection 1"
+    ETHNAME="Wired\ connection\ 1"
 
     # for name in $(nmcli -t -f NAME c show --active) ; do
     #     ETHNAME=${name}
