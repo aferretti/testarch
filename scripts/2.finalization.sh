@@ -52,34 +52,49 @@ getEthName() {
     done
 }
 
+# setIpAddress() {
+#     if [ "${APP,,}" = "neuron" ]; then
+#         #ethName="enp1s0"
+#         getEthName
+
+
+#         ethName=${ETHNAME}
+#         ethFile="/etc/systemd/network/${ethName}.network"
+
+#         ip addr flush dev ${ethName}
+
+#         cp "${CONFIGS_DIR}/${ethName}.network" "/etc/systemd/network"
+#         checkError 'cp "${CONFIGS_DIR}/${ethName}.network" "/etc/systemd/network"'
+        
+#         sed -i "s|^Name=.*|Name=${ethName}|" ${ethFile}
+#         checkError 'sed -i "s|^Name=.*|Name=${ethName}|" ${ethFile}'
+
+#         sed -i "s|^Address=.*|Address=${DEVIP}/24|" ${ethFile}
+#         checkError 'sed -i "s|^Address=.*|Address=${DEVIP}/24|" ${ethFile}'
+
+#         sed -i "s|^Gateway=.*|Gateway=${DEVGTW}|" ${ethFile}
+#         checkError 'sed -i "s|^Gateway=.*|Gateway=${DEVGTW}|" ${ethFile}'
+
+#         systemctl enable systemd-networkd.service
+#         checkError "systemctl enable systemd-networkd.service"
+
+#         systemctl enable systemd-resolved.service
+#         checkError "systemctl enable systemd-resolved.service"
+#     fi
+# }
+
 setIpAddress() {
     if [ "${APP,,}" = "neuron" ]; then
-        #ethName="enp1s0"
         getEthName
-
-
         ethName=${ETHNAME}
-        ethFile="/etc/systemd/network/${ethName}.network"
 
-        ip addr flush dev ${ethName}
+        if [ -z $ETHNAME]; then saveLogAndExit "ERROR! No active ethernet interface found"; fi
 
-        cp "${CONFIGS_DIR}/${ethName}.network" "/etc/systemd/network"
-        checkError 'cp "${CONFIGS_DIR}/${ethName}.network" "/etc/systemd/network"'
-        
-        sed -i "s|^Name=.*|Name=${ethName}|" ${ethFile}
-        checkError 'sed -i "s|^Name=.*|Name=${ethName}|" ${ethFile}'
+        ip addr flush ${ethName}
+        ip addr add ${DEVIP}/24 ${ethName}
 
-        sed -i "s|^Address=.*|Address=${DEVIP}/24|" ${ethFile}
-        checkError 'sed -i "s|^Address=.*|Address=${DEVIP}/24|" ${ethFile}'
-
-        sed -i "s|^Gateway=.*|Gateway=${DEVGTW}|" ${ethFile}
-        checkError 'sed -i "s|^Gateway=.*|Gateway=${DEVGTW}|" ${ethFile}'
-
-        systemctl enable systemd-networkd.service
-        checkError "systemctl enable systemd-networkd.service"
-
-        systemctl enable systemd-resolved.service
-        checkError "systemctl enable systemd-resolved.service"
+        ip link set dev ${ethName} down
+        ip link set dev ${ethName} up
     fi
 }
 
