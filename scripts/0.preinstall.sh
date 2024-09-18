@@ -186,7 +186,7 @@ clone() {
 
 # Esecuzione verifiche preliminari alla procedura di installazione
 clear
-showHeader "Preliminary checks and parameters/disk setup"
+#showHeader "Preliminary checks and parameters/disk setup"
 
 doChecks
 getDisk
@@ -196,7 +196,7 @@ getDisk
 # 2. Partizionamento disco, formattazione e mounting volumi
 # 3. Inizializzazione pacman e installazione package base sistema operativo
 clear
-showHeader "Date/Time Setup, Disk preparation and Pacman initialization" 
+#showHeader "Date/Time Setup, Disk preparation and Pacman initialization" 
 
 setTime
 setDisk
@@ -204,7 +204,7 @@ initPacman
 
 # Preparazione della FSTable e clonazione degli script per esecuzione in arch-chroot
 clear
-showHeader "FSTable initialization and resources cloning" 
+#showHeader "FSTable initialization and resources cloning" 
 
 initFSTable
 clone

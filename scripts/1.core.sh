@@ -134,7 +134,7 @@ setAutologin() {
 
 # Inizializzazione degli utenti e delle password e installazione packages sistema operativo e abilitazione servizi
 clear
-showHeader "Users setup and base/linux packages installation"
+#showHeader "Users setup and base/linux packages installation"
 
 setUsers
 installBasePackages
@@ -142,14 +142,14 @@ installLinuxPackages
 
 # Impostazioni timezone, locale e preparazione GRUB
 clear
-showHeader "Date/Time, Locales and Grub setup"
+#showHeader "Date/Time, Locales and Grub setup"
 
 setTimezoneAndLocale
 configureGrub
 
 # Setup default editor e autologin
 clear
-showHeader "Default editor and autologin setup"
+#showHeader "Default editor and autologin setup"
 
 setDefaultEditor
 setAutologin

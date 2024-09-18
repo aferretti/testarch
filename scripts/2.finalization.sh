@@ -43,63 +43,6 @@ setHostname() {
     echo ${DEVID} >> ${hostnameFile}
 }
 
-# getEthName() {
-#     ETHNAME=""
-
-#     for interface in $(ip -f inet addr show scope global | awk '/^[1-9]/ {print substr($2, 1, length($2)-1)}') ; do
-#         ETHNAME=$interface
-#         return
-#     done
-# }
-
-# setIpAddress() {
-#     if [ "${APP,,}" = "neuron" ]; then
-#         #ethName="enp1s0"
-#         getEthName
-
-
-#         ethName=${ETHNAME}
-#         ethFile="/etc/systemd/network/${ethName}.network"
-
-#         ip addr flush dev ${ethName}
-
-#         cp "${CONFIGS_DIR}/${ethName}.network" "/etc/systemd/network"
-#         checkError 'cp "${CONFIGS_DIR}/${ethName}.network" "/etc/systemd/network"'
-        
-#         sed -i "s|^Name=.*|Name=${ethName}|" ${ethFile}
-#         checkError 'sed -i "s|^Name=.*|Name=${ethName}|" ${ethFile}'
-
-#         sed -i "s|^Address=.*|Address=${DEVIP}/24|" ${ethFile}
-#         checkError 'sed -i "s|^Address=.*|Address=${DEVIP}/24|" ${ethFile}'
-
-#         sed -i "s|^Gateway=.*|Gateway=${DEVGTW}|" ${ethFile}
-#         checkError 'sed -i "s|^Gateway=.*|Gateway=${DEVGTW}|" ${ethFile}'
-
-#         systemctl enable systemd-networkd.service
-#         checkError "systemctl enable systemd-networkd.service"
-
-#         systemctl enable systemd-resolved.service
-#         checkError "systemctl enable systemd-resolved.service"
-#     fi
-# }
-
-# setIpAddress() {
-#     if [ "${APP,,}" = "neuron" ]; then
-#         getEthName
-#         ethName=${ETHNAME}
-
-#         if [ -z ${ETHNAME} ]; then saveLogAndExit "ERROR! No active ethernet interface found"; fi
-
-#         # ip addr flush ${ethName}
-#         # ip addr add ${DEVIP}/24 ${ethName}
-
-#         # ip link set dev ${ethName} down
-#         # ip link set dev ${ethName} up
-
-#         nmcli connection show
-#     fi
-# }
-
 prepareUserScripts() {
     scriptsPath="/home/${USERNAME}/startup"
     configFile="${scriptsPath}/env.conf"
@@ -160,12 +103,11 @@ cleanup() {
 
 # 
 clear
-showHeader "Setup finalization"
+#showHeader "Setup finalization"
 
 installOpenbox
 setHostname
 
-#setIpAddress
 prepareUserScripts
 
 cleanup

@@ -50,8 +50,8 @@ cleanupAndReboot() {
 #####################################
 
 # Impostazione indirizzo IP statico
+clear
 setIpAddress
-waitForInput 
 
 # Pulizia e riavvio
 cleanupAndReboot
