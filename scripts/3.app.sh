@@ -34,7 +34,7 @@ cleanupAndReboot() {
 
     #sudo reboot
 }
-
+PROJECT_NAME="neuron"
 setIpAddress
 
 #####################################
