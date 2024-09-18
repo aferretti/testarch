@@ -88,13 +88,15 @@ setIpAddress() {
         getEthName
         ethName=${ETHNAME}
 
-        if [ -z $ETHNAME]; then saveLogAndExit "ERROR! No active ethernet interface found"; fi
+        if [ -z ${ETHNAME} ]; then saveLogAndExit "ERROR! No active ethernet interface found"; fi
 
-        ip addr flush ${ethName}
-        ip addr add ${DEVIP}/24 ${ethName}
+        # ip addr flush ${ethName}
+        # ip addr add ${DEVIP}/24 ${ethName}
 
-        ip link set dev ${ethName} down
-        ip link set dev ${ethName} up
+        # ip link set dev ${ethName} down
+        # ip link set dev ${ethName} up
+
+        nmcli connection show
     fi
 }
 
