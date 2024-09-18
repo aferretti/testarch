@@ -23,5 +23,5 @@ cleanupAndReboot() {
 #####################################
 
 # Pulizia e riavvio
-waitForInput
+#waitForInput
 #cleanupAndReboot

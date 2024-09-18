@@ -43,10 +43,25 @@ setHostname() {
     echo ${DEVID} >> ${hostnameFile}
 }
 
+getEthName() {
+    ETHNAME=""
+
+    for interface in $(ip -f inet addr show scope global | awk '/^[1-9]/ {print substr($2, 1, length($2)-1)}') ; do
+        ETHNAME=$interface
+        return
+    done
+}
+
 setIpAddress() {
     if [ "${APP,,}" = "neuron" ]; then
-        ethName="enp1s0"
+        #ethName="enp1s0"
+        getEthName
+
+
+        ethName=${ETHNAME}
         ethFile="/etc/systemd/network/${ethName}.network"
+
+        ip addr flush dev ${ethName}
 
         cp "${CONFIGS_DIR}/${ethName}.network" "/etc/systemd/network"
         checkError 'cp "${CONFIGS_DIR}/${ethName}.network" "/etc/systemd/network"'
@@ -59,6 +74,12 @@ setIpAddress() {
 
         sed -i "s|^Gateway=.*|Gateway=${DEVGTW}|" ${ethFile}
         checkError 'sed -i "s|^Gateway=.*|Gateway=${DEVGTW}|" ${ethFile}'
+
+        systemctl enable systemd-networkd.service
+        checkError "systemctl enable systemd-networkd.service"
+
+        systemctl enable systemd-resolved.service
+        checkError "systemctl enable systemd-resolved.service"
     fi
 }
 
