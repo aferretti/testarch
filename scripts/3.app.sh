@@ -9,7 +9,7 @@ waitForInput() {
 }
 
 getEthName() {
-    ETHNAME="eu-lan"
+    ETHNAME="eu-lan"    
     echo f3rt3c | sudo -S nmcli connection modify Wired\ connection\ 1 con-name ${ETHNAME}
 }
 
@@ -35,7 +35,7 @@ cleanupAndReboot() {
     #sudo reboot
 }
 
-#setIpAddress
+setIpAddress
 
 #####################################
 # avenneri: qui...
