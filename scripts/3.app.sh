@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Caricamento file env.conf
-source ${HOME}/startup/env.conf
+#source ${HOME}/startup/env.conf
 
 waitForInput() {
     printf "Premere un tasto per cleanup e riavvio..."
