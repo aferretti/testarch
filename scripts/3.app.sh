@@ -9,13 +9,13 @@ waitForInput() {
 }
 
 getEthName() {
-    ETHNAME=""
+    ETHNAME="Wired connection 1"
 
-    for name in $(nmcli -t -f NAME c show --active) ; do
-        ETHNAME=${name}
-        echo -n ${name}
-        #return
-    done
+    # for name in $(nmcli -t -f NAME c show --active) ; do
+    #     ETHNAME=${name}
+    #     echo -n ${name}
+    #     #return
+    # done
 }
 
 setIpAddress() {
@@ -26,7 +26,7 @@ setIpAddress() {
             exit
         fi
 
-        #echo f3rt3c | sudo -S nmcli connection modify ${ETHNAME} con-name culo
+        echo f3rt3c | sudo -S nmcli connection modify ${ETHNAME} con-name culo
     fi
 }
 
