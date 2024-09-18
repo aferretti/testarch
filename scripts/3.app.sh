@@ -10,7 +10,7 @@ waitForInput() {
 
 getEthName() {
     ETHNAME="eu-lan"    
-    echo f3rt3c | sudo -S nmcli connection modify Wired\ connection\ 1 con-name ${ETHNAME}
+    #echo f3rt3c | sudo -S nmcli connection modify Wired\ connection\ 1 con-name ${ETHNAME}
 }
 
 setIpAddress() {
@@ -21,7 +21,9 @@ setIpAddress() {
             exit
         fi
 
-        
+        echo f3rt3c | sudo -S nmcli connection modify ${ETHNAME} ipv4.addresses 192.168.10.111/16
+        echo f3rt3c | sudo -S nmcli connection modify ${ETHNAME} ipv4.gateway 192.168.10.254
+        echo f3rt3c | sudo -S nmcli connection up ${ETHNAME}
     fi
 }
 
