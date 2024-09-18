@@ -43,4 +43,4 @@ setIpAddress
 
 # Pulizia e riavvio
 #waitForInput
-cleanupAndReboot
+#cleanupAndReboot
