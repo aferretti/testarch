@@ -37,11 +37,9 @@ setIpAddress() {
 cleanupAndReboot() {
     # rimozione della riga che esegue lo startup dal file .bashrc
     bashFile="${HOME}/.bashrc"
-echo ${bashFile}
-    if [ -f $[bashFile] ]; then
-        grep -v "source /home/fertec/startup/3.app.sh" ${bashFile} > ${bashFile}2 
-        mv ${bashFile}2 ${bashFile}
-    fi
+
+    grep -v "source /home/fertec/startup/3.app.sh" ${bashFile} > ${bashFile}2 
+    mv ${bashFile}2 ${bashFile}
     #sed -i '/source /home/fertec/startup/3\.app\.sh/d' ${HOME}/.bashrc
 
     # rimozione della cartella contenente gli script di avvio
