@@ -13,8 +13,8 @@ getEthName() {
 
     for name in $(nmcli -t -f NAME c show --active) ; do
         ETHNAME=${name}
-        printf ${name}
-        return
+        echo -n ${name}
+        #return
     done
 }
 
