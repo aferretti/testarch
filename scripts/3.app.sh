@@ -13,6 +13,7 @@ getEthName() {
 
     for name in $(nmcli -t -f NAME c show --active) ; do
         ETHNAME=${name}
+        printf ${name}
         return
     done
 }
@@ -24,7 +25,7 @@ setIpAddress() {
             echo "ERROR! No active ethernet interface found"; 
             exit
         fi
-echo ${ETHNAME}
+
         #echo f3rt3c | sudo -S nmcli connection modify ${ETHNAME} con-name culo
     fi
 }
