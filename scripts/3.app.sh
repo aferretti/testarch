@@ -37,7 +37,7 @@ setIpAddress() {
 cleanupAndReboot() {
     # rimozione della riga che esegue lo startup dal file .bashrc
     bashFile="${HOME}/.bashrc"
-
+echo ${bashFile}
     if [ -f $[bashFile] ]; then
         grep -v "source /home/fertec/startup/3.app.sh" ${bashFile} > ${bashFile}2 
         mv ${bashFile}2 ${bashFile}
