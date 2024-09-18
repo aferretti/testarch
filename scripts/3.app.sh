@@ -28,11 +28,10 @@ setIpAddress() {
         getEthName
         if [ -z ${ETHNAME} ]; then saveLogAndExit "ERROR! No active ethernet interface found"; fi
 
-        echo ${PASSWORD} | sudo -S nmcli connection modify ${ETHNAME} ipv4.addresses "" ipv4.gateway ""
-        echo ${PASSWORD} | sudo -S nmcli connection up ${ETHNAME}
-
-        echo ${PASSWORD} | sudo -S nmcli connection modify ${ETHNAME} ipv4.addresses ${IP}/24 ipv4.gateway ${GTW}
-        echo ${PASSWORD} | sudo -S nmcli connection up ${ETHNAME}
+        echo ${PASSWORD} | sudo -S nmcli connection modify ${ETHNAME} ipv4.addresses "${IP}/24" ipv4.gateway "${GTW}"
+        echo ${PASSWORD} | sudo -S nmcli connection modify ${ETHNAME} ipv4.method manual
+        echo ${PASSWORD} | sudo -S nmcli connection modify ${ETHNAME} connection.autoconnect yes
+        #echo ${PASSWORD} | sudo -S nmcli connection up ${ETHNAME}
     fi
 }
 
