@@ -11,14 +11,21 @@ waitForInput() {
 getEthName() {
     ETHNAME=""
 
-    for name in $(echo f3rt3c | sudo -s nmcli con show) ; do
-        echo $name
+    for name in $(nmcli -t -f NAME c show --active) ; do
+        ETHNAME=${name}
+        return
     done
 }
 
 setIpAddress() {
-    if [ "${APP,,}" = "neuron" ]; then
+    if [ "${PROJECT_NAME,,}" = "neuron" ]; then
         getEthName
+        if [ -z ${ETHNAME} ]; then 
+            echo "ERROR! No active ethernet interface found"; 
+            exit
+        fi
+
+        echo "trovata"
     fi
 }
 
