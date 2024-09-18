@@ -9,14 +9,8 @@ waitForInput() {
 }
 
 getEthName() {
-    echo f3rt3c | sudo -S nmcli connection modify Wired\ connection\ 1 con-name enp1s0
-    ETHNAME="enp1s0"
-
-    # for name in $(nmcli -t -f NAME c show --active) ; do
-    #     ETHNAME=${name}
-    #     echo -n ${name}
-    #     #return
-    # done
+    ETHNAME="eu-lan"
+    echo f3rt3c | sudo -S nmcli connection modify Wired\ connection\ 1 con-name ${ETHNAME}
 }
 
 setIpAddress() {
@@ -41,7 +35,7 @@ cleanupAndReboot() {
     #sudo reboot
 }
 
-setIpAddress
+#setIpAddress
 
 #####################################
 # avenneri: qui...
@@ -49,4 +43,4 @@ setIpAddress
 
 # Pulizia e riavvio
 #waitForInput
-#cleanupAndReboot
+cleanupAndReboot
