@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Caricamento file env.conf
-#source ${HOME}/startup/env.conf
+source ${HOME}/startup/env.conf
 
 waitForInput() {
     printf "Premere un tasto per cleanup e riavvio..."
@@ -40,13 +40,12 @@ cleanupAndReboot() {
 
     grep -v "source /home/fertec/startup/3.app.sh" ${bashFile} > ${bashFile}2 
     mv ${bashFile}2 ${bashFile}
-    #sed -i '/source /home/fertec/startup/3\.app\.sh/d' ${HOME}/.bashrc
 
     # rimozione della cartella contenente gli script di avvio
-    #if [ -d ${HOME}/startup ]; then rm -r ${HOME}/startup; fi
+    if [ -d ${HOME}/startup ]; then rm -r ${HOME}/startup; fi
 
     # riavvio
-    #echo ${PASSWORD} | sudo -S reboot >> /dev/null
+    echo ${PASSWORD} | sudo -S reboot >> /dev/null
 }
 
 #####################################
@@ -54,8 +53,8 @@ cleanupAndReboot() {
 #####################################
 
 # Impostazione indirizzo IP statico
-#setIpAddress
-#clear
+setIpAddress
+clear
 
 # Pulizia e riavvio
 cleanupAndReboot
